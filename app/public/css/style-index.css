@@ -1,0 +1,47 @@
+/* Ajustes generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+/* Body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Layout */
+.main-layout {
+    margin: 10px;
+    padding: 180px;
+    border: 1px solid #ddd; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+}
+
+/* Contenido layout */
+.main-content {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.main-content a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.main-content a:hover {
+    background-color: rgb(46, 45, 45);
+}

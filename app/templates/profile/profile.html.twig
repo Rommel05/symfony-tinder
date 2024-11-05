@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profile {% endblock%}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/style-profile.css') }}">
+{% endblock%}
+
+{% block body %}
+    <div class="main-layout">
+        <header class="header">
+            <h1>Profile</h1>
+        </header>
+        <div class="main-content">
+            <div class="profile-content">
+                <img src="#" alt="Profile image" class="profile-image">
+                <div class="profile-info">
+                    <h2>Username</h2>
+                    <p>Sexo</p>
+                    <p>Age: user-age</p>
+                    <p>User-description</p>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <a href="#" id="edit">Edit</a>
+                <a href="#" id="remove">Remove</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

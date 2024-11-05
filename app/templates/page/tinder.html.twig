@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tinder{% endblock%}
+{% block stylesheet%}
+    <link rel="stylesheet" href="{{ asset('css/style-tinder.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="main-layout">
+        <header class="header">
+            <h1>Tinder</h1>
+        </header>
+        <div class="main-content">
+            <div class="profile-content">
+                <img src="#" alt="profile image" class="profile-image">
+                <div class="profile-information">
+                    <h2>Profile-name</h2>
+                    <p>Sexo</p>
+                    <p>Profile-description</p>
+                </div>
+                <div class="profile-buttons">
+                    <button id="button-unlike">Unlike</button>
+                    <button id="button-like">Like</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
