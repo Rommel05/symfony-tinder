@@ -4,6 +4,7 @@
 {% block stylesheet%}
     <link rel="stylesheet" href="{{ asset('css/style-tinder.css') }}">
 {% endblock %}
+
 {% block body %}
     <div class="main-layout">
         <header class="header">
@@ -11,7 +12,7 @@
         </header>
         <div class="main-content">
             <div class="profile-content">
-                <img src="{{ asset('images/image1.jpg') }}" alt="profile image" class="profile-image">
+                <img src="{{ asset('images/image1.jpg') }}" alt="profile image" id="profile-image">
                 <div class="profile-information">
                     <h2>Profile-name</h2>
                     <p>Sexo</p>
@@ -24,7 +25,8 @@
             </div>
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('js/script.js') }}"></script>
+
+    {% block javascripts %}
+        <script src="{{ asset('js/script.js') }}"></script>
+    {% endblock %}
 {% endblock %}

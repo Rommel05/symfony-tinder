@@ -14,7 +14,7 @@
     margin-bottom: 20px;
 }
 
-.profile-image {
+#profile-image {
     width: 300px; 
     height: auto;
     border-radius: 10px; 
