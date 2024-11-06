@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,6 +43,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imagePath = null;
+
+    #[ORM\OneToMany(mappedBy: 'swipe', targetEntity: Swipe::class)]
+    private Collection $swipes;
+
+    #[ORM\OneToMany(mappedBy: 'pair', targetEntity: Pair::class)]
+    private Collection $pairs;
+
+    public function __construct()
+    {
+        $this->swipes = new ArrayCollection();
+        $this->pairs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -168,6 +182,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImagePath(?string $imagePath): self
     {
         $this->imagePath = $imagePath;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Swipe>
+     */
+    public function getSwipes(): Collection
+    {
+        return $this->swipes;
+    }
+
+    public function addSwipe(Swipe $swipe): self
+    {
+        if (!$this->swipes->contains($swipe)) {
+            $this->swipes->add($swipe);
+            $swipe->setSwipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSwipe(Swipe $swipe): self
+    {
+        if ($this->swipes->removeElement($swipe)) {
+            // set the owning side to null (unless already changed)
+            if ($swipe->getSwipe() === $this) {
+                $swipe->setSwipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pair>
+     */
+    public function getPairs(): Collection
+    {
+        return $this->pairs;
+    }
+
+    public function addPair(Pair $pair): self
+    {
+        if (!$this->pairs->contains($pair)) {
+            $this->pairs->add($pair);
+            $pair->setPair($this);
+        }
+
+        return $this;
+    }
+
+    public function removePair(Pair $pair): self
+    {
+        if ($this->pairs->removeElement($pair)) {
+            // set the owning side to null (unless already changed)
+            if ($pair->getPair() === $this) {
+                $pair->setPair(null);
+            }
+        }
 
         return $this;
     }
