@@ -26,6 +26,18 @@
     justify-content: center;
 }
 
+#button-profile {
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    background-color: #6b6b6b;
+    border-radius: 10px;
+}
+
+#button-profile:hover{
+    background-color: #383838;
+}
+
 #button-like {
     padding: 10px;
     font-weight: bold;

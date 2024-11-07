@@ -4,7 +4,6 @@ window.onload = () => {
 let images = [
     "images/image2.jpg",
     "images/image3.jpg",
-    "images/image4.jpg",
     "images/image1.jpg"
 ];
 
@@ -19,3 +18,8 @@ function like() {
         profileImage.setAttribute("src", currentImage);
     });
 }
+
+let profileButton =  document.getElementById("button-profile");
+profileButton.addEventListener("click", function (){
+    window.location.href = "/profile";
+});

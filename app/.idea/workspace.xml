@@ -6,6 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="8d9f092c-b104-48c4-9d71-49d1c21f393d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style-tinder.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style-tinder.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/image1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/image2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/image3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/page/tinder.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/page/tinder.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +27,11 @@
     </execution>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="imagenes" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
@@ -169,7 +182,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "pruebaBD",
+    "git-widget-placeholder": "profile",
     "last_opened_file_path": "/home/alumno/symfony-tinder/app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -209,6 +222,8 @@
       <workItem from="1727164354794" duration="19000" />
       <workItem from="1730802484454" duration="84000" />
       <workItem from="1730802572952" duration="1758000" />
+      <workItem from="1730966900797" duration="1728000" />
+      <workItem from="1730968658608" duration="3536000" />
     </task>
     <servers />
   </component>
