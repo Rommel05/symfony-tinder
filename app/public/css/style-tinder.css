@@ -49,3 +49,15 @@
 #button-unlike:hover {
     background-color: rgb(153, 40, 40);
 }
+
+#first-user {
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(204, 30, 30);
+    border-radius: 10px;
+}
+
+#first-user:hover {
+    background-color: rgb(153, 40, 40);
+}

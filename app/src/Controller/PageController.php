@@ -14,10 +14,10 @@ class PageController extends AbstractController
     public function prueba($id, UserRepository $userRepository): Response
     {
         $usuario = $userRepository->find($id);
-        if (!$usuario) {
+        /*if (!$usuario) {
             //cambiar esto por una plantilla
             throw $this->createNotFoundException('Usuario no encontrado.');
-        }
+        }*/
         return $this->render('page/tinder.html.twig', [
             'usuario' => $usuario,
         ]);

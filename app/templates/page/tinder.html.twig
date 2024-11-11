@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tinder{% endblock%}
-{% block stylesheet%}
+{% block title %}Tinder{% endblock %}
+{% block stylesheet %}
     <link rel="stylesheet" href="{{ asset('css/style-tinder.css') }}">
 {% endblock %}
 
@@ -11,18 +11,27 @@
             <h1>Tinder</h1>
         </header>
         <div class="main-content">
-            <div class="profile-content">
-                <img src="{{ asset('images/' ~ usuario.imagePath) }}" alt="profile image" id="profile-image">
-                <div class="profile-information">
-                    <h2>{{ usuario.name }}</h2>
-                    <p>{{ usuario.gender }}</p>
-                    <p>{{ usuario.description }}</p>
+            {% if usuario is not null %}
+                <div class="profile-content">
+                    <img src="{{ asset('images/' ~ usuario.imagePath) }}" alt="profile image" id="profile-image">
+                    <div class="profile-information">
+                        <h2>{{ usuario.name }}</h2>
+                        <p>{{ usuario.gender }}</p>
+                        <p>{{ usuario.description }}</p>
+                    </div>
+                    <div class="profile-buttons">
+                        <button id="button-unlike">Unlike</button>
+                        <button id="button-like">Like</button>
+                    </div>
                 </div>
-                <div class="profile-buttons">
-                    <button id="button-unlike">Unlike</button>
-                    <button id="button-like">Like</button>
+            {% else %}
+                <div class="profile-content">
+                    <p>No se han encontrado más usuarios</p>
+                    <div class="profile-buttons">
+                        <button id="first-user">Volver al primer perfil</button>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 
@@ -30,18 +39,28 @@
         <script src="{{ asset('js/script.js') }}"></script>
         <script>
             window.onload = () => {
-                let usuarioActual = {{ usuario.id }}
-
-                    function nextUser() {
-                        let next = usuarioActual + 1;
-                        window.location.assign("/tinder/" + next);
-                    }
+                {% if usuario is not null %}
+                let usuarioActual = {{ usuario.id }};
+                function nextUser() {
+                    let next = usuarioActual + 1;
+                    window.location.assign("/tinder/" + next);
+                }
 
                 let like = document.getElementById("button-like");
                 like.addEventListener("click", nextUser);
 
                 let unlike = document.getElementById("button-unlike");
                 unlike.addEventListener("click", nextUser);
+                {% else %}
+                let firstId = 1;
+                let firstUser = document.getElementById("first-user");
+
+                function firstProfile() {
+                    window.location.assign("/tinder/" + firstId);
+                }
+
+                firstUser.addEventListener("click", firstProfile);
+                {% endif %}
             }
         </script>
     {% endblock %}
