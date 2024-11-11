@@ -12,11 +12,11 @@
         </header>
         <div class="main-content">
             <div class="profile-content">
-                <img src="{{ asset('images/image1.jpg') }}" alt="profile image" id="profile-image">
+                <img src="{{ asset('images/' ~ usuario.imagePath) }}" alt="profile image" id="profile-image">
                 <div class="profile-information">
-                    <h2>Profile-name</h2>
-                    <p>Sexo</p>
-                    <p>Profile-description</p>
+                    <h2>{{ usuario.name }}</h2>
+                    <p>{{ usuario.gender }}</p>
+                    <p>{{ usuario.description }}</p>
                 </div>
                 <div class="profile-buttons">
                     <button id="button-unlike">Unlike</button>
@@ -28,5 +28,21 @@
 
     {% block javascripts %}
         <script src="{{ asset('js/script.js') }}"></script>
+        <script>
+            window.onload = () => {
+                let usuarioActual = {{ usuario.id }}
+
+                    function nextUser() {
+                        let next = usuarioActual + 1;
+                        window.location.assign("/tinder/" + next);
+                    }
+
+                let like = document.getElementById("button-like");
+                like.addEventListener("click", nextUser);
+
+                let unlike = document.getElementById("button-unlike");
+                unlike.addEventListener("click", nextUser);
+            }
+        </script>
     {% endblock %}
 {% endblock %}
