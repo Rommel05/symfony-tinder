@@ -46,16 +46,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imagePath = null;
 
-    #[ORM\OneToMany(mappedBy: 'swipe', targetEntity: Swipe::class)]
-    private Collection $swipes;
+    #[ORM\OneToMany(mappedBy: 'userA', targetEntity: Swipe::class)]
+    private Collection $swipesAsUserA;
 
-    #[ORM\OneToMany(mappedBy: 'pair', targetEntity: Pair::class)]
-    private Collection $pairs;
+    #[ORM\OneToMany(mappedBy: 'userB', targetEntity: Swipe::class)]
+    private Collection $swipesAsUserB;
+
+    #[ORM\OneToMany(mappedBy: 'userA', targetEntity: Pair::class)]
+    private Collection $pairsAsUserA;
+
+    #[ORM\OneToMany(mappedBy: 'userB', targetEntity: Pair::class)]
+    private Collection $pairsAsUserB;
 
     public function __construct()
     {
-        $this->swipes = new ArrayCollection();
-        $this->pairs = new ArrayCollection();
+        $this->swipesAsUserA = new ArrayCollection();
+        $this->swipesAsUserB = new ArrayCollection();
+        $this->pairsAsUserA = new ArrayCollection();
+        $this->pairsAsUserB = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,27 +199,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Swipe>
      */
-    public function getSwipes(): Collection
+    public function getSwipesAsUserA(): Collection
     {
-        return $this->swipes;
+        return $this->swipesAsUserA;
     }
 
-    public function addSwipe(Swipe $swipe): self
+    public function addSwipesAsUserA(Swipe $swipesAsUserA): self
     {
-        if (!$this->swipes->contains($swipe)) {
-            $this->swipes->add($swipe);
-            $swipe->setSwipe($this);
+        if (!$this->swipesAsUserA->contains($swipesAsUserA)) {
+            $this->swipesAsUserA->add($swipesAsUserA);
+            $swipesAsUserA->setUserA($this);
         }
 
         return $this;
     }
 
-    public function removeSwipe(Swipe $swipe): self
+    public function removeSwipesAsUserA(Swipe $swipesAsUserA): self
     {
-        if ($this->swipes->removeElement($swipe)) {
+        if ($this->swipesAsUserA->removeElement($swipesAsUserA)) {
             // set the owning side to null (unless already changed)
-            if ($swipe->getSwipe() === $this) {
-                $swipe->setSwipe(null);
+            if ($swipesAsUserA->getUserA() === $this) {
+                $swipesAsUserA->setUserA(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Swipe>
+     */
+    public function getSwipesAsUserB(): Collection
+    {
+        return $this->swipesAsUserB;
+    }
+
+    public function addSwipesAsUserB(Swipe $swipesAsUserB): self
+    {
+        if (!$this->swipesAsUserB->contains($swipesAsUserB)) {
+            $this->swipesAsUserB->add($swipesAsUserB);
+            $swipesAsUserB->setUserB($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSwipesAsUserB(Swipe $swipesAsUserB): self
+    {
+        if ($this->swipesAsUserB->removeElement($swipesAsUserB)) {
+            // set the owning side to null (unless already changed)
+            if ($swipesAsUserB->getUserB() === $this) {
+                $swipesAsUserB->setUserB(null);
             }
         }
 
@@ -221,27 +259,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Pair>
      */
-    public function getPairs(): Collection
+    public function getPairsAsUserA(): Collection
     {
-        return $this->pairs;
+        return $this->pairsAsUserA;
     }
 
-    public function addPair(Pair $pair): self
+    public function addPairAsUserA(Pair $pairAsUserA): self
     {
-        if (!$this->pairs->contains($pair)) {
-            $this->pairs->add($pair);
-            $pair->setPair($this);
+        if (!$this->pairsAsUserA->contains($pairAsUserA)) {
+            $this->pairsAsUserA->add($pairAsUserA);
+            $pairAsUserA->setUserA($this);
         }
 
         return $this;
     }
 
-    public function removePair(Pair $pair): self
+    public function removePairAsUserA(Pair $pairAsUserA): self
     {
-        if ($this->pairs->removeElement($pair)) {
+        if ($this->pairsAsUserA->removeElement($pairAsUserA)) {
             // set the owning side to null (unless already changed)
-            if ($pair->getPair() === $this) {
-                $pair->setPair(null);
+            if ($pairAsUserA->getUserA() === $this) {
+                $pairAsUserA->setUserA(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pair>
+     */
+    public function getPairsAsUserB(): Collection
+    {
+        return $this->pairsAsUserB;
+    }
+
+    public function addPairsAsUserB(Pair $pairsAsUserB): self
+    {
+        if (!$this->pairsAsUserB->contains($pairsAsUserB)) {
+            $this->pairsAsUserB->add($pairsAsUserB);
+            $pairsAsUserB->setUserB($this);
+        }
+
+        return $this;
+    }
+
+    public function removePairsAsUserB(Pair $pairsAsUserB): self
+    {
+        if ($this->pairsAsUserB->removeElement($pairsAsUserB)) {
+            // set the owning side to null (unless already changed)
+            if ($pairsAsUserB->getUserB() === $this) {
+                $pairsAsUserB->setUserB(null);
             }
         }
 

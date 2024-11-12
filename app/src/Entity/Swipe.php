@@ -13,48 +13,21 @@ class Swipe
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $userA = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $userB = null;
-
     #[ORM\Column]
     private ?bool $action = null;
 
-    #[ORM\ManyToOne(inversedBy: 'swipes')]
-    private ?User $swipe = null;
+    #[ORM\ManyToOne(inversedBy: 'swipesAsUserA')]
+    private ?User $userA = null;
+
+    #[ORM\ManyToOne(inversedBy: 'swipesAsUserB')]
+    private ?User $userB = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserA(): ?string
-    {
-        return $this->userA;
-    }
-
-    public function setUserA(string $userA): self
-    {
-        $this->userA = $userA;
-
-        return $this;
-    }
-
-    public function getUserB(): ?string
-    {
-        return $this->userB;
-    }
-
-    public function setUserB(string $userB): self
-    {
-        $this->userB = $userB;
-
-        return $this;
-    }
-
-    public function isAction(): ?bool
+    public function getAction(): ?bool
     {
         return $this->action;
     }
@@ -66,14 +39,26 @@ class Swipe
         return $this;
     }
 
-    public function getSwipe(): ?User
+    public function getUserA(): ?User
     {
-        return $this->swipe;
+        return $this->userA;
     }
 
-    public function setSwipe(?User $swipe): self
+    public function setUserA(?User $userA): self
     {
-        $this->swipe = $swipe;
+        $this->userA = $userA;
+
+        return $this;
+    }
+
+    public function getUserB(): ?User
+    {
+        return $this->userB;
+    }
+
+    public function setUserB(?User $userB): self
+    {
+        $this->userB = $userB;
 
         return $this;
     }

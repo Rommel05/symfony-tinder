@@ -13,52 +13,37 @@ class Pair
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $userA = null;
+    #[ORM\ManyToOne(inversedBy: 'pairsAsUserA')]
+    private ?User $userA = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $userB = null;
-
-    #[ORM\ManyToOne(inversedBy: 'pairs')]
-    private ?User $pair = null;
+    #[ORM\ManyToOne(inversedBy: 'pairsAsUserB')]
+    private ?User $userB = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserA(): ?string
+    public function getUserA(): ?User
     {
         return $this->userA;
     }
 
-    public function setUserA(string $userA): self
+    public function setUserA(?User $userA): self
     {
         $this->userA = $userA;
 
         return $this;
     }
 
-    public function getUserB(): ?string
+    public function getUserB(): ?User
     {
         return $this->userB;
     }
 
-    public function setUserB(string $userB): self
+    public function setUserB(?User $userB): self
     {
         $this->userB = $userB;
-
-        return $this;
-    }
-
-    public function getPair(): ?User
-    {
-        return $this->pair;
-    }
-
-    public function setPair(?User $pair): self
-    {
-        $this->pair = $pair;
 
         return $this;
     }
