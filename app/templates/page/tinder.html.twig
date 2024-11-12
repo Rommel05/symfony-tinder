@@ -40,17 +40,21 @@
         <script>
             window.onload = () => {
                 {% if usuario is not null %}
-                let usuarioActual = {{ usuario.id }};
-                function nextUser() {
-                    let next = usuarioActual + 1;
-                    window.location.assign("/tinder/" + next);
+                let usuarioMostrado = {{ usuario.id }};
+                let siguienteUsuario = usuarioMostrado + 1;
+                function nextUser(action) {
+                    window.location.assign("/tinder/" + siguienteUsuario + "?userA={{ app.user.id }}&userB={{ usuario.id }}&action=" + action);
                 }
 
                 let like = document.getElementById("button-like");
-                like.addEventListener("click", nextUser);
+                like.addEventListener("click", function () {
+                    nextUser(0)
+                });
 
                 let unlike = document.getElementById("button-unlike");
-                unlike.addEventListener("click", nextUser);
+                unlike.addEventListener("click", function () {
+                    nextUser(1)
+                });
                 {% else %}
                 let firstId = 1;
                 let firstUser = document.getElementById("first-user");
