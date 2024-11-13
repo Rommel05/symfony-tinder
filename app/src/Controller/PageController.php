@@ -19,14 +19,14 @@ class PageController extends AbstractController
     {
         $userA = $this->getUser();
         if ($id == null) {
-            $firstUser = $userRepository->createQueryBuilder('u')
-                ->where('u != :currentUser')
-                ->setParameter('currentUser', $userA)
-                ->orderBy('u.id', 'ASC')
-                ->setMaxResults(1)
-                ->getQuery()
-                ->getOneOrNullResult();
-            return $this->redirectToRoute('app_tinder', ['id' => $firstUser->getId()]);
+            $nextUser = $userRepository->findUserExcludeCurrent($userA);
+            if (!$nextUser) {
+                return $this->render('page/tinder.html.twig', [
+                    'usuario' => null,
+                ]);
+            }
+            return $this->redirectToRoute('app_tinder', ['id' => $nextUser->getId()]);
+
         }
 
 

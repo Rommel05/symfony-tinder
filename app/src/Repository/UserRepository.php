@@ -42,6 +42,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
     }
 
+    public function findUserExcludeCurrent(User $userA): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u != :currentUser')
+            ->setParameter('currentUser', $userA)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
