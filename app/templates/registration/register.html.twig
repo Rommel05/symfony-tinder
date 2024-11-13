@@ -1,24 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/style-form.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div id="main-layout">
+        <header id="header1">
+            <h1>Register</h1>
+        </header>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.age) }}
-        {{ form_row(registrationForm.description) }}
-        {{ form_row(registrationForm.gender) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        {{ form_row(registrationForm.file, {
-            label: 'Image'
-        }) }}
+        <main>
+            {{ form_start(registrationForm, { 'attr' : {'id' : 'form'}}) }}
+            {{ form_row(registrationForm.name) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.age) }}
+            {{ form_row(registrationForm.description) }}
+            {{ form_row(registrationForm.gender) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            <div id="checkbox-container">
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'checkbox'}}) }}
+                {{ form_label(registrationForm.agreeTerms, 'Acepto los términos y condiciones', {'attr': {'class': 'label'}}) }}
+            </div>
+            {{ form_row(registrationForm.file, {
+                label: 'Image'
+            }) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <button type="submit" class="btn">Register</button>
+            {{ form_end(registrationForm) }}
+        </main>
+    </div>
+
 {% endblock %}
