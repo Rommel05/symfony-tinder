@@ -14,16 +14,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
 {
-    #[Route('/tinder/{id}', name: 'app_tinder')]
-    #[Route('/tinder', name: 'app_tinder_default')]
+    #[Route('/tinder/{id?}', name: 'app_tinder')]
     public function swipe(UserRepository $userRepository, Request $request, ManagerRegistry $managerRegistry, $id = null): Response
     {
+        $userA = $this->getUser();
         if ($id == null) {
-            $firstUser = $userRepository->findOneBy([],['id' => 'ASC']);
+            $firstUser = $userRepository->createQueryBuilder('u')
+                ->where('u != :currentUser')
+                ->setParameter('currentUser', $userA)
+                ->orderBy('u.id', 'ASC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getOneOrNullResult();
             return $this->redirectToRoute('app_tinder', ['id' => $firstUser->getId()]);
         }
-        $userA = $this->getUser();
+
+
         $userB = $userRepository->find($id);
+
+        if ($userA == $userB) {
+            return $this->redirectToRoute('app_tinder');
+        }
         $action = $request->get('action');
 
         $entityManager = $managerRegistry->getManager();
