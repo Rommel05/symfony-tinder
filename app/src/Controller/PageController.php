@@ -40,29 +40,34 @@ class PageController extends AbstractController
         $entityManager = $managerRegistry->getManager();
 
         if ($action != null) {
-            $swipe = new Swipe();
-            $swipe->setUserA($userA);
-            $swipe->setUserB($userB);
-            $swipe->setAction((bool) $action);
-            $entityManager->persist($swipe);
 
-            if ($swipe->getAction()) {
-                foreach ($userB->getSwipesAsUserA() as $swipeB) {
-                    if ($swipeB->getUserB() === $userA && $swipeB->getAction()) {
-                        $pairA = new Pair();
-                        $pairA->setUserA($userA);
-                        $pairA->setUserB($userB);
-                        $entityManager->persist($pairA);
+            $existingSwipe = $entityManager->getRepository(Swipe::class)->findOneBy(['userA' => $userA, 'userB' => $userB]);
 
-                        $pairB = new Pair();
-                        $pairB->setUserA($userA);
-                        $pairB->setUserB($userB);
-                        $entityManager->persist($pairB);
+            if (!$existingSwipe) {
+                $swipe = new Swipe();
+                $swipe->setUserA($userA);
+                $swipe->setUserB($userB);
+                $swipe->setAction((bool) $action);
+                $entityManager->persist($swipe);
+
+                if ($swipe->getAction()) {
+                    foreach ($userB->getSwipesAsUserA() as $swipeB) {
+                        if ($swipeB->getUserB() === $userA && $swipeB->getAction()) {
+                            $pairA = new Pair();
+                            $pairA->setUserA($userA);
+                            $pairA->setUserB($userB);
+                            $entityManager->persist($pairA);
+
+                            $pairB = new Pair();
+                            $pairB->setUserA($userA);
+                            $pairB->setUserB($userB);
+                            $entityManager->persist($pairB);
+                        }
                     }
                 }
-            }
 
-            $entityManager->flush();
+                $entityManager->flush();
+            }
         }
         return $this->render('page/tinder.html.twig', [
             'usuario' => $userB,
