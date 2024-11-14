@@ -42,18 +42,19 @@
                 {% if usuario is not null %}
                 let usuarioMostrado = {{ usuario.id }};
                 let siguienteUsuario = usuarioMostrado + 1;
+
                 function nextUser(action) {
                     window.location.assign("/tinder/" + siguienteUsuario + "?userA={{ app.user.id }}&userB={{ usuario.id }}&action=" + action);
                 }
 
                 let like = document.getElementById("button-like");
                 like.addEventListener("click", function () {
-                    nextUser(0)
+                    nextUser(1)
                 });
 
                 let unlike = document.getElementById("button-unlike");
                 unlike.addEventListener("click", function () {
-                    nextUser(1)
+                    nextUser(0)
                 });
                 {% else %}
                 let firstId = 1;
