@@ -31,7 +31,7 @@ class PageController extends AbstractController
 
         $userB = $userRepository->find($id);
 
-        if ($userA === $userB) {
+        if (!$userB || $userA === $userB) {
             return $this->redirectToRoute('app_tinder');
         }
         $action = $request->get('action');
@@ -68,8 +68,10 @@ class PageController extends AbstractController
                 $entityManager->flush();
             }
         }
+        $nextUser = $userRepository->findUserExcludeCurrent($userA, [$userB->getId()]);
         return $this->render('page/tinder.html.twig', [
             'usuario' => $userB,
+            'nextUserId' => $nextUser ? $nextUser->getId() : null,
         ]);
 
     }

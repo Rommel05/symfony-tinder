@@ -39,33 +39,31 @@
         <script src="{{ asset('js/script.js') }}"></script>
         <script>
             window.onload = () => {
-                {% if usuario is not null %}
-                let usuarioMostrado = {{ usuario.id }};
-                let siguienteUsuario = usuarioMostrado + 1;
+                let nextUserId = {{ nextUserId | default(null) }};
+                let userA = {{ app.user.id }};
+                let userB = {{ usuario.id }};
 
-                function nextUser(action) {
-                    window.location.assign("/tinder/" + siguienteUsuario + "?userA={{ app.user.id }}&userB={{ usuario.id }}&action=" + action);
+                if (nextUserId) {
+                    function nextUser(action) {
+                        window.location.assign(`/tinder/${nextUserId}?userA=${userA}&userB=${userB}&action=${action}`);
+                    }
+
+                    let like = document.getElementById("button-like");
+                    like.addEventListener("click", function () {
+                        nextUser(1)
+                    });
+
+                    let unlike = document.getElementById("button-unlike");
+                    unlike.addEventListener("click", function () {
+                        nextUser(0)
+                    });
+                } else {
+                    let firstUser = document.getElementById("first-user");
+                    firstUser.addEventListener("click", () => {
+                        window.location.assign("/tinder");
+                    })
                 }
 
-                let like = document.getElementById("button-like");
-                like.addEventListener("click", function () {
-                    nextUser(1)
-                });
-
-                let unlike = document.getElementById("button-unlike");
-                unlike.addEventListener("click", function () {
-                    nextUser(0)
-                });
-                {% else %}
-                let firstId = 1;
-                let firstUser = document.getElementById("first-user");
-
-                function firstProfile() {
-                    window.location.assign("/tinder/" + firstId);
-                }
-
-                firstUser.addEventListener("click", firstProfile);
-                {% endif %}
             }
         </script>
     {% endblock %}

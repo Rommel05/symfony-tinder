@@ -42,11 +42,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
     }
 
-    public function findUserExcludeCurrent(User $userA): ?User
+    public function findUserExcludeCurrent(User $currentUser, array $excludedIds = []): ?User
     {
+        $excludedIds[] = $currentUser->getId();
+
         return $this->createQueryBuilder('u')
-            ->where('u != :currentUser')
-            ->setParameter('currentUser', $userA)
+            ->where('u.id NOT IN (:excludedIds)')
+            ->setParameter('excludedIds', $excludedIds)
             ->orderBy('u.id', 'ASC')
             ->setMaxResults(1)
             ->getQuery()
