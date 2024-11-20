@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class PageController extends AbstractController
 {
     #[Route('/tinder/{id?}', name: 'app_tinder')]
@@ -34,8 +35,8 @@ class PageController extends AbstractController
         if (!$userB || $userA === $userB) {
             return $this->redirectToRoute('app_tinder');
         }
-        $action = $request->get('action');
 
+        $action = $request->get('action');
         $entityManager = $managerRegistry->getManager();
 
         if ($action != null) {
@@ -46,6 +47,8 @@ class PageController extends AbstractController
                 $swipe = new Swipe();
                 $swipe->setUserA($userA);
                 $swipe->setUserB($userB);
+
+
                 $swipe->setAction((bool) $action);
                 $entityManager->persist($swipe);
 
