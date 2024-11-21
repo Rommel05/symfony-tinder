@@ -28,9 +28,6 @@
             {% else %}
                 <div class="profile-content">
                     <p>No se han encontrado más usuarios</p>
-                    <div class="profile-buttons">
-                        <button id="first-user">Volver al primer perfil</button>
-                    </div>
                 </div>
             {% endif %}
         </div>
@@ -40,31 +37,22 @@
         <script src="{{ asset('js/script.js') }}"></script>
         <script>
             window.onload = () => {
-                let nextUserId = {{ nextUserId | default(null) }};
-                let userA = {{ app.user.id }};
-                let userB = {{ usuario.id }};
+                let userBId = {{ usuario ? usuario.id : 'null' }}
 
-                if (nextUserId) {
-                    function nextUser(action) {
-                        window.location.assign(`/tinder/${nextUserId}?userA=${userA}&userB=${userB}&action=${action}`);
-                    }
+                if (userBId) {
+                    let like = document.getElementById('button-like');
+                    let unlike = document.getElementById('button-unlike');
 
-                    let like = document.getElementById("button-like");
-                    like.addEventListener("click", function () {
-                        nextUser(1)
+                    like.addEventListener('click', () => {
+                        fetch(`/like/${userBId}`, { method: 'POST' })
+                            .then(() => window.location.reload());
                     });
 
-                    let unlike = document.getElementById("button-unlike");
-                    unlike.addEventListener("click", function () {
-                        nextUser(0)
-                    });
-                } else {
-                    let firstUser = document.getElementById("first-user");
-                    firstUser.addEventListener("click", () => {
-                        window.location.assign("/tinder");
+                    unlike.addEventListener("click", () => {
+                        fetch(`/unlike/${userBId}` , { method: 'POST' })
+                            .then(() => window.location.reload());
                     })
                 }
-
             }
         </script>
     {% endblock %}

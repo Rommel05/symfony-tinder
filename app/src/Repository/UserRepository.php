@@ -42,7 +42,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
     }
 
-    public function findUserExcludeCurrent(User $currentUser, array $excludedIds = []): ?User
+    /*public function findUserExcludeCurrent(User $currentUser, array $excludedIds = []): ?User
     {
         $excludedIds[] = $currentUser->getId();
 
@@ -53,7 +53,25 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }*/
+
+    // UserRepository.php
+    public function findNextUser($userA, $excludedIds = [])
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.id != :currentUser')
+            ->setParameter('currentUser', $userA->getId());
+
+        if (!empty($excludedIds)) {
+            $qb->andWhere('u.id NOT IN (:excludedIds)')
+                ->setParameter('excludedIds', $excludedIds);
+        }
+
+        return $qb->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
+
 
 
     /**

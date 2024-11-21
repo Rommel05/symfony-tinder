@@ -14,69 +14,125 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
 {
-    #[Route('/tinder/{id?}', name: 'app_tinder')]
-    public function swipe(UserRepository $userRepository, Request $request, ManagerRegistry $managerRegistry, $id = null): Response
+    #[Route('/tinder', name: 'app_tinder')]
+    public function swipe(UserRepository $userRepository, ManagerRegistry $managerRegistry): Response
     {
         $userA = $this->getUser();
-        if ($id == null) {
-            $nextUser = $userRepository->findUserExcludeCurrent($userA);
-            if (!$nextUser) {
-                return $this->render('page/tinder.html.twig', [
-                    'usuario' => null,
-                ]);
-            }
-            return $this->redirectToRoute('app_tinder', ['id' => $nextUser->getId()]);
+        $entityManager = $managerRegistry->getManager();
 
-        }
+        $swipedUsers = $entityManager->getRepository(Swipe::class)
+            ->createQueryBuilder('s')
+            ->select('IDENTITY(s.userB)')
+            ->where('s.userA = :userA')
+            ->setParameter('userA', $userA)
+            ->getQuery()
+            ->getScalarResult();
+
+        $excludedIds = array_column($swipedUsers, 1);
+
+        $nextUser = $userRepository->findNextUser($userA, $excludedIds);
+
+        return $this->render('page/tinder.html.twig', [
+            'usuario' => $nextUser,
+            'nextUserId' => $nextUser ? $nextUser->getId() : null,
+        ]);
+    }
 
 
-        $userB = $userRepository->find($id);
-
-        if (!$userB || $userA === $userB) {
+    #[Route('/like/{id?}', name: 'app_like')]
+    public function like(UserRepository $userRepository, Request $request, ManagerRegistry $managerRegistry, int $id): Response
+    {
+        if ($id === null) {
             return $this->redirectToRoute('app_tinder');
         }
 
-        $action = $request->get('action');
+        $userA = $this->getUser();
+        $userB = $userRepository->find($id);
+
+        if (!$userB || $userB === $userA) {
+            return $this->redirectToRoute('app_tinder');
+        }
+
         $entityManager = $managerRegistry->getManager();
 
-        if ($action != null) {
-
-            $existingSwipe = $entityManager->getRepository(Swipe::class)->findOneBy(['userA' => $userA, 'userB' => $userB]);
-
-            if (!$existingSwipe) {
-                $swipe = new Swipe();
-                $swipe->setUserA($userA);
-                $swipe->setUserB($userB);
-
-
-                $swipe->setAction((bool) $action);
-                $entityManager->persist($swipe);
-
-                if ($swipe->getAction()) {
-                    foreach ($userB->getSwipesAsUserA() as $swipeB) {
-                        if ($swipeB->getUserB() === $userA && $swipeB->getAction()) {
-                            $pairA = new Pair();
-                            $pairA->setUserA($userA);
-                            $pairA->setUserB($userB);
-                            $entityManager->persist($pairA);
-
-                            $pairB = new Pair();
-                            $pairB->setUserA($userA);
-                            $pairB->setUserB($userB);
-                            $entityManager->persist($pairB);
-                        }
-                    }
-                }
-
-                $entityManager->flush();
-            }
-        }
-        $nextUser = $userRepository->findUserExcludeCurrent($userA, [$userB->getId()]);
-        return $this->render('page/tinder.html.twig', [
-            'usuario' => $userB,
-            'nextUserId' => $nextUser ? $nextUser->getId() : null,
+        $existSwipe = $entityManager->getRepository(Swipe::class)->findOneBy([
+            'userA' => $userA,
+            'userB' => $userB,
         ]);
 
+        if (!$existSwipe) {
+            $swipe = new Swipe();
+            $swipe->setUserA($userA);
+            $swipe->setUserB($userB);
+            $swipe->setAction(true);
+            $entityManager->persist($swipe);
+
+            $match = $entityManager->getRepository(Swipe::class)->findOneBy([
+                'userA' => $userB,
+                'userB' => $userA,
+                'action' => true,
+            ]);
+
+            if ($match) {
+                $pairA = new Pair();
+                $pairA->setUserA($userA);
+                $pairA->setUserB($userB);
+                $entityManager->persist($pairA);
+
+                $pairB = new Pair();
+                $pairB->setUserA($userB);
+                $pairB->setUserB($userA);
+                $entityManager->persist($pairB);
+            }
+
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('app_tinder');
     }
 
+    #[Route('/unlike/{id?}', name: 'app_unlike')]
+    public function unlike(UserRepository $userRepository, Request $request, ManagerRegistry $managerRegistry, int $id): Response
+    {
+        if ($id === null) {
+            return $this->redirectToRoute('app_tinder');
+        }
+
+        $userA = $this->getUser();
+        $userB = $userRepository->find($id);
+
+        if (!$userB || $userB === $userA) {
+            return $this->redirectToRoute('app_tinder');
+        }
+
+        $entityManager = $managerRegistry->getManager();
+
+        $existSwipe = $entityManager->getRepository(Swipe::class)->findOneBy([
+            'userA' => $userA,
+            'userB' => $userB,
+        ]);
+
+        if (!$existSwipe) {
+            $swipe = new Swipe();
+            $swipe->setUserA($userA);
+            $swipe->setUserB($userB);
+            $swipe->setAction(false);
+            $entityManager->persist($swipe);
+
+            foreach ($userB->getSwipesAsUserA() as $swipeB) {
+                if ($swipeB->getUserB() === $userA && $swipeB->getAction()) {
+                    $pairA = new Pair();
+                    $pairA->setUserA($userA);
+                    $pairA->setUserB($userB);
+                    $entityManager->persist($pairA);
+
+                    $pairB = new Pair();
+                    $pairB->setUserA($userB);
+                    $pairB->setUserB($userA);
+                    $entityManager->persist($pairB);
+                }
+            }
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('app_tinder');
+    }
 }
