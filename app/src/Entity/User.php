@@ -34,8 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $age = null;
+
 
     #[ORM\Column(length: 50)]
     private ?string $gender = null;
@@ -57,6 +56,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'userB', targetEntity: Pair::class)]
     private Collection $pairsAsUserB;
+
+    #[ORM\Column(length: 255)]
+    private ?string $interests = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $age = null;
 
     public function __construct()
     {
@@ -144,18 +149,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getAge(): ?int
-    {
-        return $this->age;
-    }
-
-    public function setAge(int $age): self
-    {
-        $this->age = $age;
 
         return $this;
     }
@@ -312,6 +305,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $pairsAsUserB->setUserB(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInterests(): ?string
+    {
+        return $this->interests;
+    }
+
+    public function setInterests(string $interests): self
+    {
+        $this->interests = $interests;
+
+        return $this;
+    }
+
+    public function getAge(): ?string
+    {
+        return $this->age;
+    }
+
+    public function setAge(string $age): self
+    {
+        $this->age = $age;
 
         return $this;
     }
