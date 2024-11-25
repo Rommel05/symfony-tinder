@@ -22,13 +22,13 @@ class PageController extends AbstractController
 
         $swipedUsers = $entityManager->getRepository(Swipe::class)
             ->createQueryBuilder('s')
-            ->select('IDENTITY(s.userB)')
+            ->select('IDENTITY(s.userB) as userB')
             ->where('s.userA = :userA')
             ->setParameter('userA', $userA)
             ->getQuery()
-            ->getScalarResult();
+            ->getResult();
 
-        $excludedIds = array_column($swipedUsers, 1);
+        $excludedIds = array_column($swipedUsers, 'userB');
 
         $nextUser = $userRepository->findNextUser($userA, $excludedIds);
 
