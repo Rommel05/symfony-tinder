@@ -55,7 +55,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult();
     }*/
 
-    // UserRepository.php
     public function findNextUser($userA, $excludedIds = [])
     {
         $qb = $this->createQueryBuilder('u')
