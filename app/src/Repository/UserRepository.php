@@ -55,7 +55,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult();
     }*/
 
-    public function findNextUser($userA, $excludedIds = [])
+    /*public function findNextUser($userA, $excludedIds = [])
     {
         $qb = $this->createQueryBuilder('u')
             ->where('u.id != :currentUser')
@@ -69,7 +69,43 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $qb->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }*/
+
+    public function findNextUser($userA, $excludedIds = [], $gender = 'woman')
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.id != :currentUser')
+            ->andWhere('u.gender = :gender')
+            ->setParameter('currentUser', $userA->getId())
+            ->setParameter('gender', $gender);
+
+        if (!empty($excludedIds)) {
+            $qb->andWhere('u.id NOT IN (:excludedIds)')
+                ->setParameter('excludedIds', $excludedIds);
+        }
+
+        return $qb->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
+
+    /*public function findNextUserWoman($userA, $excludedIds = [])
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.id != :currentUser')
+            ->andWhere('u.gender = :gender')
+            ->setParameter('currentUser', $userA->getId())
+            ->setParameter('gender', 'woman');
+
+        if (!empty($excludedIds)) {
+            $qb->andWhere('u.id NOT IN (:excludedIds)')
+                ->setParameter('excludedIds', $excludedIds);
+        }
+
+        return $qb->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }*/
 
 
 

@@ -20,6 +20,8 @@ class PageController extends AbstractController
         $userA = $this->getUser();
         $entityManager = $managerRegistry->getManager();
 
+        $gender = ($userA->getGender() === 'man') ? 'woman' : 'man';
+
         $swipedUsers = $entityManager->getRepository(Swipe::class)
             ->createQueryBuilder('s')
             ->select('IDENTITY(s.userB) as userB')
@@ -30,7 +32,7 @@ class PageController extends AbstractController
 
         $excludedIds = array_column($swipedUsers, 'userB');
 
-        $nextUser = $userRepository->findNextUser($userA, $excludedIds);
+        $nextUser = $userRepository->findNextUser($userA, $excludedIds, $gender);
 
         return $this->render('page/tinder.html.twig', [
             'usuario' => $nextUser,
