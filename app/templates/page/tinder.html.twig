@@ -18,7 +18,7 @@
                         <h2>{{ usuario.name }}</h2>
                         <p>{{ usuario.gender }}</p>
                         <p>{{ usuario.description }}</p>
-                        <p>{{ usuario.id }}</p>
+                        {# <p>{{ usuario.id }}</p> #}
                     </div>
                     <div class="profile-buttons">
                         <button id="button-unlike">Unlike</button>
@@ -27,7 +27,7 @@
                 </div>
             {% else %}
                 <div class="profile-content">
-                    <p>No se han encontrado más usuarios</p>
+                    <p>No se han encontrado más usuarios con tus intereses</p>
                 </div>
             {% endif %}
         </div>
