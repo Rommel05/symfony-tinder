@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Match{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/style-form.css') }}">
+{% endblock %}
+{% block body %}
+    {% if pairs is not null %}
+        <ul>
+            {% for pair in pairs %}
+                <li>{{ pair.userB.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else%}
+        <p>No tienes ningún match</p>
+    {% endif %}
+{% endblock %}
