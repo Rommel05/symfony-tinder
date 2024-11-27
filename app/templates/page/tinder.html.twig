@@ -6,10 +6,20 @@
 {% endblock %}
 
 {% block body %}
+    <header class="header">
+        <h1>Tinder</h1>
+    </header>
+
+    <nav class="navbar">
+        <ul class="navbar-list">
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Logout</a></li>
+            <li><a href="{{ path('app_likes') }}">Likes</a></li>
+            <li><a href="#">Matches</a></li>
+        </ul>
+    </nav>
+
     <div class="main-layout">
-        <header class="header">
-            <h1>Tinder</h1>
-        </header>
         <div class="main-content">
             {% if usuario is not null %}
                 <div class="profile-content">

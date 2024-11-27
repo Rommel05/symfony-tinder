@@ -8,6 +8,42 @@
     margin: 0;
 }
 
+/*Header*/
+.header {
+    text-align: center;
+}
+
+/* Nav */
+.navbar {
+    width: 100%;
+    background-color: #333;
+}
+
+.navbar-list {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-list li {
+    margin: 10px 20px;
+}
+
+.navbar-list a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.navbar-list a:hover {
+    background-color: #555;
+}
+
+
 /* Profile */
 .profile-content {
     text-align: center;
@@ -19,6 +55,7 @@
     height: auto;
     border-radius: 10px; 
 }
+
  /* Buttons like and unlike */
 .profile-buttons {
     display: flex;
@@ -50,7 +87,7 @@
     background-color: rgb(153, 40, 40);
 }
 
-#first-user {
+/*#first-user {
     padding: 10px;
     font-weight: bold;
     color: white;
@@ -60,4 +97,4 @@
 
 #first-user:hover {
     background-color: rgb(153, 40, 40);
-}
+}*/

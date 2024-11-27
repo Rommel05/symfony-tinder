@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Likes{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/style-form.css') }}">
+{% endblock %}
+{% block body %}
+    {# {% for like in likes %}
+        <div>
+            {% if like is not null %}
+                <p>{{ like.userA.name }}</p>
+            {% else %}
+                <p>No tienes nigún like</p>
+            {% endif %}
+        </div>
+    {% endfor %} #}
+
+    {% if likes is not null %}
+        <ul>
+            {% for like in likes %}
+                <li>{{ like.userA.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else%}
+        <p>No tienes ningún like</p>
+    {% endif %}
+{% endblock %}
