@@ -1,0 +1,62 @@
+/* General Reset */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9; /* Fondo claro */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra verticalmente */
+    flex-direction: column; /* Coloca los elementos uno debajo del otro */
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Color del texto del título */
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px; /* Ancho fijo para el formulario */
+    background-color: #fff; /* Fondo blanco */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombras suaves */
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+/* Contenedor de botones */
+#buttons {
+    display: flex; /* Coloca los botones en fila */
+    justify-content: space-between; /* Espaciado uniforme */
+    gap: 10px; /* Espaciado opcional entre los botones */
+    margin-top: 10px;
+    align-items: center; /* Alineación vertical */
+}
+
+/* Botones: mismos estilos */
+button, input[type="submit"] {
+    padding: 10px 20px; /* Espaciado interno uniforme */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #b0b0b0; /* Color gris claro */
+    color: white; /* Texto blanco */
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; /* Efectos suaves */
+    text-align: center; /* Asegura que el texto esté centrado */
+    min-width: 100px; /* Ancho mínimo para uniformidad */
+}
+
+/* Hover en botones */
+button:hover, input[type="submit"]:hover {
+    background-color: #808080; /* Gris más oscuro */
+    border-color: #666; /* Oscurece el borde al hacer hover */
+}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/edit_profile.css') }}">
+{% endblock%}
+
+{% block body %}
+    <h1>Edit Profile</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.password) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.age) }}
+    {{ form_row(form.gender) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.imagePath) }}
+
+    <div id="buttons">
+        <!--<button type="submit" id="save">{{ form_label(form.save) }}Save</button>-->
+        <!--<button type="submit" id="save">Save</button>-->
+        {{ form_end(form) }}
+
+        <button id="cancel" onclick="window.location.href='{{ path('app_profile') }}'">Cancel</button>
+    </div>
+{% endblock %}

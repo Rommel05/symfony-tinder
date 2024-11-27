@@ -135,4 +135,11 @@ class PageController extends AbstractController
         }
         return $this->redirectToRoute('app_tinder');
     }
+
+    #[Route('/logout', name: 'app_logout', methods: ['GET'])]
+    public function logout(): void
+    {
+        throw new \LogicException('Symfony maneja el proceso de logout automáticamente.');
+    }
+
 }

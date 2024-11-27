@@ -12,19 +12,27 @@
             <h1>Profile</h1>
         </header>
         <div class="main-content">
-            <div class="profile-content">
-                <img src="#" alt="Profile image" class="profile-image">
-                <div class="profile-info">
-                    <h2>Username</h2>
-                    <p>Sexo</p>
-                    <p>Age: user-age</p>
-                    <p>User-description</p>
+            {% if usuario is not null %}
+                <div class="profile-content">
+                    <img src="{{ asset('images/' ~ usuario.imagePath) }}" alt="profile image" id="profile-image">
+                    <div class="profile-information">
+                        <h2>{{ usuario.name }}</h2>
+                        <p>{{ usuario.gender }}</p>
+                        <p>{{ usuario.age }}</p>
+                        <p>{{ usuario.description }}</p>
+                    </div>
                 </div>
-            </div>
+            {% else %}
+                <div class="profile-content">
+                    <p>No se ha encontrado el usuario</p>
+                </div>
+            {% endif %}
 
             <div class="profile-actions">
-                <a href="#" id="edit">Edit</a>
-                <a href="#" id="remove">Remove</a>
+                <button id="edit" onclick="window.location.href='{{ path('app_profile_edit') }}'">Edit</button>
+                <form method="post" action="{{ path('app_profile_remove') }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta?');">
+                    <button type="submit" id="remove">Remove</button>
+                </form>
             </div>
         </div>
     </div>

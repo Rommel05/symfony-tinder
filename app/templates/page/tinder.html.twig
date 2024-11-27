@@ -6,6 +6,10 @@
 {% endblock %}
 
 {% block body %}
+    <div id="header-buttons">
+        <button id="button-profile" onclick="window.location.href='{{ path('app_profile') }}'">Profile</button>
+        <button id="button-logout" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
+    </div>
     <div class="main-layout">
         <header class="header">
             <h1>Tinder</h1>
@@ -18,7 +22,7 @@
                         <h2>{{ usuario.name }}</h2>
                         <p>{{ usuario.gender }}</p>
                         <p>{{ usuario.description }}</p>
-                        <p>{{ usuario.id }}</p>
+                        <p>{{ usuario.age }}</p>
                     </div>
                     <div class="profile-buttons">
                         <button id="button-unlike">Unlike</button>

@@ -1,3 +1,40 @@
+#header-buttons button{
+    float: right;
+    background-color: #b0b0b0;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 5px;
+}
+
+#header-buttons button:hover {
+    background-color: #909090;
+    transform: translateY(-2px);
+}
+
+#button-profile {
+    background-color: #b0b0b0;
+}
+
+#button-profile:hover {
+    background-color: #808080;
+}
+
+#button-logout {
+    background-color: #b0b0b0;
+}
+
+#button-logout:hover {
+    background-color: #707070;
+}
+
+
+
 /* Layout */
 .main-layout {
     display: flex;
