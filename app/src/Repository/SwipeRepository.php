@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Swipe;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,33 @@ class SwipeRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findSwipesUserAUserB(User $userA, User $userB)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.userA = :userA AND s.userB = :userB')
+            ->orWhere('s.userA = :userB AND s.userB = :userA')
+            ->setParameters([
+                'userA' => $userA,
+                'userB' => $userB,
+            ])
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function deleteSwipesUserAUserB(User $userA, User $userB)
+    {
+        return $this->createQueryBuilder('s')
+            ->delete()
+            ->where('s.userA = :userA AND s.userB = :userB')
+            ->orWhere('s.userA = :userB AND s.userB = :userA')
+            ->setParameters([
+                'userA' => $userA,
+                'userB' => $userB,
+            ])
+            ->getQuery()
+            ->execute();
     }
 
 //    /**

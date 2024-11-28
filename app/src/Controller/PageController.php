@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pair;
 use App\Entity\Swipe;
+use App\Repository\SwipeRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,7 +43,7 @@ class PageController extends AbstractController
 
 
     #[Route('/like/{id?}', name: 'app_like')]
-    public function like(UserRepository $userRepository, Request $request, ManagerRegistry $managerRegistry, int $id): Response
+    public function like(UserRepository $userRepository, Request $request, ManagerRegistry $managerRegistry, int $id, SwipeRepository $swipeRepository): Response
     {
         if ($id === null) {
             return $this->redirectToRoute('app_tinder');
@@ -86,7 +87,6 @@ class PageController extends AbstractController
                 $pairB->setUserB($userA);
                 $entityManager->persist($pairB);
             }
-
             $entityManager->flush();
         }
         return $this->redirectToRoute('app_tinder');
