@@ -5,13 +5,13 @@
     <link rel="stylesheet" href="{{ asset('css/style-form.css') }}">
 {% endblock %}
 {% block body %}
-    {% if pairs is not null %}
+    {% if pairs is not empty %}
         <ul>
             {% for pair in pairs %}
                 <li>{{ pair.userB.name }}</li>
             {% endfor %}
         </ul>
-    {% else%}
+    {% else %}
         <p>No tienes ningún match</p>
     {% endif %}
 {% endblock %}

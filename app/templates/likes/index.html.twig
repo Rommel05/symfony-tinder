@@ -15,7 +15,7 @@
         </div>
     {% endfor %} #}
 
-    {% if likes is not null %}
+    {% if likes is not empty %}
         <ul>
             {% for like in likes %}
                 <li>{{ like.userA.name }}</li>
