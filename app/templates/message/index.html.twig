@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{# {% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/style-form.css') }}">
+{% endblock %} #}
+
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+    <div id="main-layout">
+
+        <div id="messages">
+            {% for message in messages %}
+                <div>
+                    <p>{{ message.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        {{ form_start(form, { 'attr' : {'id' : 'form'}}) }}
+        {{ form_row(form.text, {'attr' : {'maxlength' : '1000'}}) }}
+
+        <button type="submit" class="btn">Send</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

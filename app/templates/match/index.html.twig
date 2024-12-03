@@ -8,7 +8,7 @@
     {% if pairs is not empty %}
         <ul>
             {% for pair in pairs %}
-                <li>{{ pair.userB.name }}</li>
+                <li> <a href={{ path('app_message', { id: pair.userB.id }) }}>{{ pair.userB.name }}</a> </li>
             {% endfor %}
         </ul>
     {% else %}
