@@ -16,11 +16,13 @@
     {% endfor %} #}
 
     {% if likes is not empty %}
-        <ul>
-            {% for like in likes %}
-                <li>{{ like.userA.name }}</li>
-            {% endfor %}
-        </ul>
+        {% for like in likes %}
+            <img src="{{ asset('images/' ~ like.userA.imagePath) }}" alt="profile image" id="profile-image">
+            <div class="profile-information">
+                <h2>{{ like.userA.name }}</h2>
+                {# <p>{{ usuario.id }}</p> #}
+            </div>
+        {% endfor %}
     {% else%}
         <p>No tienes ningún like</p>
     {% endif %}

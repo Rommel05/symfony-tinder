@@ -6,11 +6,16 @@
 {% endblock %}
 {% block body %}
     {% if pairs is not empty %}
-        <ul>
-            {% for pair in pairs %}
-                <li> <a href={{ path('app_message', { id: pair.userB.id }) }}>{{ pair.userB.name }}</a> </li>
-            {% endfor %}
-        </ul>
+        {% for pair in pairs %}
+            <div>
+                <img src="{{ asset('images/' ~ pair.userB.imagePath) }}" alt="profile image" id="profile-image">
+                <div class="profile-information">
+                    <p><a href={{ path('app_message', { id: pair.userB.id }) }}>{{ pair.userB.name }}</a></p>
+                    {# <p>{{ usuario.id }}</p> #}
+                </div>
+            </div>
+
+        {% endfor %}
     {% else %}
         <p>No tienes ningún match</p>
     {% endif %}
