@@ -1,33 +1,36 @@
-{# templates/login/index.html.twig #}
 {% extends 'base.html.twig' %}
-{% block stylesheet %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/style-form.css') }}">
 {% endblock %}
-{# ... #}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-    <div id="main-layout">
-        <header id="header1">
-            <h1>Login</h1>
-        </header>
+    <div id="content" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="login-container p-4 rounded shadow-lg bg-white">
+            <header class="mb-4">
+                <h1 class="display-4 text-center">Login</h1>
+            </header>
 
-        <main>
-            <form action="{{ path('login') }}" method="post" id="form">
-                <label for="username">Email:</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+            <main>
+                <form action="{{ path('login') }}" method="post" id="form">
+                    <div class="mb-3">
+                        <label for="username" class="texto form-label">Email</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required>
+                    </div>
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="_password"/>
+                    <div class="mb-3">
+                        <label for="password" class="texto form-label">Password</label>
+                        <input type="password" id="password" name="_password" class="form-control" required>
+                    </div>
 
-                {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"/> #}
-
-                <button type="submit">Login</button>
-            </form>
-        </main>
+                    <button type="submit" id="boton" class="btn btn-lg w-100">Login</button>
+                </form>
+            </main>
+        </div>
     </div>
-
 {% endblock %}

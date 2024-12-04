@@ -1,0 +1,124 @@
+/* General Layout */
+body {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+/* Header */
+header h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Container */
+.form-container {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-label{
+    color: black;
+}
+
+.form-control {
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+/* Alerts */
+.alert {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Checkbox and Terms */
+.larger-check .form-check-input {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 8px;
+}
+
+.larger-check .form-check-label {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #000;
+}
+
+/* Additional Styling */
+.texto {
+    color: black;
+    text-align: center;
+}
+
+#boton {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
+    color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+}
+
+#boton:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.login-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Header Styles */
+header h1 {
+    font-size: 2.5rem;
+    color: #ff4d4d;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Adjusting for Responsiveness */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .btn-custom {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+}

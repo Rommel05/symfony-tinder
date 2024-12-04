@@ -1,57 +1,100 @@
-/* Main-layout */
-.main-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ddd; 
+/* General container adjustments */
+.container-fluid {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
 }
 
-/* Profile */
+/* Profile header */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile content */
 .profile-content {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.profile-image {
-    width: 300px;
-    height: auto;
+    background: white;
     border-radius: 10px;
-}
-
-.profile-actions {
-    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    padding: 1.5rem;
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
 
-/* Edit and Remove */
-#edit {
-    text-decoration: none;
-    color: white;
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ff4d4d;
+    cursor: pointer;
+}
+
+/* Profile information */
+.profile-information h2 {
+    font-size: 1.8rem;
     font-weight: bold;
-    padding: 10px;
-    background-color: black;
-    border-radius: 10px;
+    color: #ff4d4d;
 }
 
-#remove {
-    text-decoration: none;
+.profile-information p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+/* Profile actions */
+.profile-actions .btn {
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.profile-actions .btn-primary {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
     color: white;
-    font-weight: bold;
-    padding: 10px;
-    background-color: black;
-    border-radius: 10px;
 }
 
-#edit:hover {
-    background-color: rgb(46, 45, 45);
+.profile-actions .btn-primary:hover {
+    background-color: #ff7f7f;
 }
 
-#remove:hover {
-    background-color: rgb(46, 45, 45);
+.profile-actions .btn-danger {
+    background-color: #f44336;
+    border-color: #f44336;
+    color: white;
+}
+
+.profile-actions .btn-danger:hover {
+    background-color: #e53935;
+}
+
+/* Asegura que la imagen modal tenga un buen tamaño */
+.modal img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+/* Cambia el fondo del modal */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro translúcido */
+}
+
+.tinder-link {
+    font-size: 2.5rem; /* Igual que el título Profile */
+    font-weight: bold; /* Igual que el título Profile */
+    color: rgba(220,53,69,255); !important;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Igual que el título Profile */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Para que se note como interactivo */
+}
+
+.tinder-link:hover {
+    text-decoration: underline; /* Efecto visual al pasar el cursor */
 }

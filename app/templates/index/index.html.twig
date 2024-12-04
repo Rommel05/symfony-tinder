@@ -1,18 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Welcome{% endblock %}
-{% block stylesheet %}
+
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/style-index.css') }}">
 {% endblock %}
 
 {% block body %}
-    <div class="main-layout">
+
+    <div id="content" class="main-layout text-center">
         <header class="header">
-            <h1>Welcome</h1>
+            <h1>Welcome to Our Dating Platform</h1>
+            <p>Find your connection and start your story</p>
         </header>
-        <main class="main-content">
-            <a href="{{ path('login') }}">Sign-in</a>
-            <a href="{{ path('app_register') }}">Sign-up</a>
+        <main class="main-content mt-4">
+            <button class="btn btn-custom btn-login me-3" onclick="window.location.href='{{ path('login') }}'">Sign-in</button>
+            <button class="btn btn-custom btn-signup" onclick="window.location.href='{{ path('app_register') }}'">Sign-up</button>
         </main>
     </div>
 {% endblock %}

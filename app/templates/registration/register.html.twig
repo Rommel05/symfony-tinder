@@ -1,37 +1,80 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
-{% block stylesheet %}
-    <link rel="stylesheet" href="{{ asset('css/style-form.css') }}">
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style-register.css') }}">
 {% endblock %}
 
 {% block body %}
-    <div id="main-layout">
-        <header id="header1">
-            <h1>Register</h1>
-        </header>
+    <div class="d-flex align-items-center justify-content-center vh-100">
+        <div class="form-container bg-white p-4 rounded shadow" style="max-width: 800px; width: 100%;">
+            <header class="text-center mb-4">
+                <h1 class="h3 text-danger">Register</h1>
+            </header>
 
-        <main>
-            {{ form_start(registrationForm, { 'attr' : {'id' : 'form'}}) }}
-            {{ form_row(registrationForm.name) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.age) }}
-            {{ form_row(registrationForm.description) }}
-            {{ form_row(registrationForm.gender) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }}
-            <div id="checkbox-container">
-                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'checkbox'}}) }}
-                {{ form_label(registrationForm.agreeTerms, 'Acepto los términos y condiciones', {'attr': {'class': 'label'}}) }}
+            {{ form_start(registrationForm, { 'attr': { 'class': 'needs-validation', 'novalidate': '' } }) }}
+            <div class="row">
+                <!-- Primera columna -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.name, 'Name', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.name) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.age, 'Age', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.age, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.age) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.description, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.description) }}
+                    </div>
+                </div>
+
+                <!-- Segunda columna -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.gender, 'Gender', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.gender, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.gender) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.file, 'Image', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.file, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.file) }}
+                    </div>
+                    <br>
+                    <div class="mb-3 larger-check">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_label(registrationForm.agreeTerms, 'I agree to the terms and conditions', {'label_attr': {'class': 'form-check-label'}}) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                </div>
             </div>
-            {{ form_row(registrationForm.file, {
-                label: 'Image'
-            }) }}
 
-            <button type="submit" class="btn">Register</button>
+            <div class="d-flex justify-content-center mt-4">
+                <button id="boton" type="submit" class="btn btn-primary btn-lg">Register</button>
+            </div>
             {{ form_end(registrationForm) }}
-        </main>
+        </div>
     </div>
-
 {% endblock %}

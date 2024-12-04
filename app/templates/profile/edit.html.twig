@@ -2,26 +2,69 @@
 
 {% block title %}Edit Profile{% endblock %}
 
-{% block stylesheet %}
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/edit_profile.css') }}">
-{% endblock%}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Profile</h1>
+    <div class="container-fluid vh-100 d-flex flex-column justify-content-center align-items-center">
+        <!-- Título -->
+        <h1 class="text-danger mb-4">Edit Profile</h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.password) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.age) }}
-    {{ form_row(form.gender) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.imagePath) }}
+        <!-- Formulario de edición -->
+        <div class="card p-4 shadow-lg w-100" style="max-width: 800px;">
+            {{ form_start(form) }}
+            <div class="row">
+                <!-- Columna izquierda -->
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        {{ form_label(form.name, 'Name', {'label_attr': {'class': 'form-label no-wrap'}}) }}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.name) }}
+                    </div>
 
-    <div id="buttons">
-        <!--<button type="submit" id="save">{{ form_label(form.save) }}Save</button>-->
-        <!--<button type="submit" id="save">Save</button>-->
-        {{ form_end(form) }}
+                    <div class="form-group mb-3">
+                        {{ form_label(form.age, 'Age', {'label_attr': {'class': 'form-label no-wrap'}}) }}
+                        {{ form_widget(form.age, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.age) }}
+                    </div>
 
-        <button id="cancel" onclick="window.location.href='{{ path('app_profile') }}'">Cancel</button>
+                    <div class="form-group mb-3">
+                        {{ form_label(form.gender, 'Gender', {'label_attr': {'class': 'form-label no-wrap'}}) }}
+                        {{ form_widget(form.gender, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.gender) }}
+                    </div>
+                </div>
+
+                <!-- Columna derecha -->
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label no-wrap'}}) }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.imagePath, 'Profile Image', {'label_attr': {'class': 'form-label no-wrap'}}) }}
+                        {{ form_widget(form.imagePath, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.imagePath) }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.password, 'Password', {'label_attr': {'class': 'form-label no-wrap'}}) }}
+                        {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.password) }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-center mt-4 gap-2">
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary action-button'}}) }}
+                <button type="button" class="btn btn-secondary action-button" onclick="window.location.href='{{ path('app_profile') }}'">Cancel</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
