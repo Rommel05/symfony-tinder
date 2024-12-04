@@ -1,98 +1,65 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
+#content {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    color: white;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    /*color: #333;*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    position: relative;
+    min-height: 100vh;
 }
 
-#main-layout {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 8px;
-    border: 1px solid #666666;
-}
-
-#header1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
+.texto{
     color: black;
 }
 
-#form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /*align-items: center;*/
-}
-
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid rgb(138, 135, 135);
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: #ffffff;
-    color: #333;
-    outline: none;
-}
-
-button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: none;
-    background-color: #000000;
+#boton {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
     color: white;
-    font-size: 1rem;
-    font-weight: bold;
     border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#boton:hover {
+    opacity: 0.8;
     cursor: pointer;
+    transform: scale(1.05);
 }
 
-button[type="submit"]:hover {
-    background-color: #252424;
+.login-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-#checkbox-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    margin-bottom: 10px;
+header h1 {
+    font-size: 2.5rem;
+    color: #ff4d4d;
+    font-weight: 700;
 }
 
-#checkbox-container label {
-    margin-left: 10px;
+.form-control {
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 1.1rem;
 }
 
-
-#checkbox-container label {
-    margin-left: 10px;
+.btn-custom {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-#checkbox-container input {
-    margin-right: 10px;
+.btn-login {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
+}
+
+.btn-custom:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.alert {
+    margin-top: 20px;
 }

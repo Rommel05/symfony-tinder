@@ -1,30 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Profile {% endblock%}
+{% block title %}Profile{% endblock %}
 
-{% block stylesheet %}
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/style-profile.css') }}">
-{% endblock%}
+{% endblock %}
 
 {% block body %}
-    <div class="main-layout">
-        <header class="header">
-            <h1>Profile</h1>
-        </header>
-        <div class="main-content">
-            <div class="profile-content">
-                <img src="#" alt="Profile image" class="profile-image">
-                <div class="profile-info">
-                    <h2>Username</h2>
-                    <p>Sexo</p>
-                    <p>Age: user-age</p>
-                    <p>User-description</p>
-                </div>
-            </div>
+    <div class="container-fluid vh-100 d-flex flex-column">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center py-3">
+            <h1 class="text-danger">Profile</h1>
+            <a href="{{ path('app_tinder') }}" class="text-decoration-none fw-bold tinder-link">Tinder</a>
+        </div>
 
-            <div class="profile-actions">
-                <a href="#" id="edit">Edit</a>
-                <a href="#" id="remove">Remove</a>
+        <!-- Contenido principal -->
+        <div class="main-layout flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+            {% if usuario is not null %}
+                <div class="profile-content card shadow p-4 d-flex flex-md-row flex-column align-items-center gap-4">
+                    <!-- Imagen del perfil -->
+                    <img src="{{ asset('images/' ~ usuario.imagePath) }}"
+                         class="rounded shadow profile-img"
+                         alt="profile image"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+
+                    <!-- Información del perfil -->
+                    <div class="profile-information">
+                        <h2 class="text-primary">{{ usuario.name }}</h2>
+                        <p class="text-muted"><strong>Gender:</strong> {{ usuario.gender }}</p>
+                        <p class="text-muted"><strong>Age:</strong> {{ usuario.age }}</p>
+                        <p class="text-muted">{{ usuario.description }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning text-center mt-4" role="alert">
+                    No se ha encontrado el usuario.
+                </div>
+            {% endif %}
+
+            <!-- Acciones del perfil -->
+            <div class="profile-actions mt-4 d-flex gap-3">
+                <button id="edit" class="btn btn-primary" onclick="window.location.href='{{ path('app_profile_edit') }}'">
+                    Edit
+                </button>
+                <form method="post" action="{{ path('app_profile_remove') }}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta?');">
+                    <button type="submit" id="remove" class="btn btn-danger">Remove</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de la imagen -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body d-flex justify-content-center">
+                    <img src="{{ asset('images/' ~ usuario.imagePath) }}" class="img-fluid rounded shadow-lg" alt="profile image">
+                </div>
             </div>
         </div>
     </div>

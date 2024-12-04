@@ -1,46 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Tinder{% endblock %}
-{% block stylesheet %}
+
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/style-tinder.css') }}">
 {% endblock %}
 
 {% block body %}
-    <header class="header">
-        <h1>Tinder</h1>
-    </header>
+    <div id="content" class="container-fluid vh-100 d-flex flex-column">
+        <!-- Header con botones -->
+        <div class="header-buttons d-flex justify-content-between align-items-center py-3">
+            <button class="btn btn-outline-danger" onclick="window.location.href='{{ path('app_profile') }}'">Profile</button>
+            <button class="btn btn-outline-danger" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
+        </div>
 
-    <nav class="navbar">
-        <ul class="navbar-list">
-            <li><a href="#">Perfil</a></li>
-            <li><a href="#">Logout</a></li>
-            <li><a href="{{ path('app_likes') }}">Likes</a></li>
-            <li><a href="{{ path('app_match') }}">Matches</a></li>
-            {# <li><a href="{{ path('app_message') }}">Message</a></li> #}
-        </ul>
-    </nav>
+        <!-- Contenido principal -->
+        <div class="main-layout flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+            <header class="text-center mb-4">
+                <h1 class="display-4 text-danger">Tinder</h1>
+            </header>
 
-    <div class="main-layout">
-        <div class="main-content">
-            {% if usuario is not null %}
-                <div class="profile-content">
-                    <img src="{{ asset('images/' ~ usuario.imagePath) }}" alt="profile image" id="profile-image">
-                    <div class="profile-information">
-                        <h2>{{ usuario.name }}</h2>
-                        <p>{{ usuario.gender }}</p>
-                        <p>{{ usuario.description }}</p>
-                        {# <p>{{ usuario.id }}</p> #}
+            <div class="main-content w-100 d-flex justify-content-center align-items-center">
+                {% if usuario is not null %}
+                    <div class="user-profile d-flex align-items-center">
+                        <!-- Imagen del perfil -->
+                        <img src="{{ asset('images/' ~ usuario.imagePath) }}"
+                             class="profile-img shadow rounded"
+                             alt="profile image">
+
+                        <!-- Información del perfil -->
+                        <div class="info-card d-flex flex-column justify-content-center">
+                            <h2 class="user-name">{{ usuario.name }}</h2>
+                            <p class="user-gender">{{ usuario.gender }}</p>
+                            <p class="user-description">{{ usuario.description }}</p>
+                            <p class="user-age"><strong>Age:</strong> {{ usuario.age }}</p>
+
+                            <!-- Botones de acción -->
+                            <div class="action-buttons d-flex justify-content-around mt-3">
+                                <button id="button-unlike" class="btn btn-secondary">Unlike</button>
+                                <button id="button-like" class="btn btn-primary">Like</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="profile-buttons">
-                        <button id="button-unlike">Unlike</button>
-                        <button id="button-like">Like</button>
+                {% else %}
+                    <!-- Mensaje si no hay usuarios -->
+                    <div class="alert alert-warning text-center" role="alert">
+                        No se han encontrado más usuarios.
                     </div>
-                </div>
-            {% else %}
-                <div class="profile-content">
-                    <p>No se han encontrado más usuarios con tus intereses</p>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
 
@@ -60,9 +69,9 @@
                     });
 
                     unlike.addEventListener("click", () => {
-                        fetch(`/unlike/${userBId}` , { method: 'POST' })
+                        fetch(`/unlike/${userBId}`, { method: 'POST' })
                             .then(() => window.location.reload());
-                    })
+                    });
                 }
             }
         </script>

@@ -1,0 +1,107 @@
+/* General container adjustments */
+.container-fluid {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Card styling */
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Form labels */
+.form-label {
+    color: #555;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Form fields */
+.form-control {
+    border-radius: 5px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.form-control:focus {
+    border-color: #ff4d4d;
+    box-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ff7f7f;
+    border-color: #ff7f7f;
+}
+
+.btn-secondary {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    color: #555;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Buttons alignment and size */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Espaciado uniforme entre botones */
+    margin-top: 1.5rem;
+}
+
+.action-buttons .btn {
+    width: 150px; /* Ancho consistente */
+    height: 45px; /* Altura consistente */
+    font-size: 1rem; /* Tamaño de fuente consistente */
+}
+
+/* Prevent label wrapping */
+.no-wrap {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: unset;
+}
+
+/* Ensure proper spacing in the form */
+.form-control {
+    margin-bottom: 1rem;
+}

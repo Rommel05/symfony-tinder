@@ -1,100 +1,127 @@
-/* Layout */
-.main-layout {
+#content {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    font-family: Arial, sans-serif;
+}
+
+/* General layout */
+.user-profile {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+    gap: 2rem;
+    max-width: 80%;
+    margin: auto;
 }
 
-/*Header*/
-.header {
-    text-align: center;
+/* Imagen del perfil */
+.profile-img {
+    max-height: 400px;
+    width: auto;
+    flex-shrink: 0;
+    border-radius: 10px;
 }
 
-/* Nav */
-.navbar {
+/* Contenedor de información */
+.info-card {
+    max-width: 500px;
     width: 100%;
-    background-color: #333;
-}
-
-.navbar-list {
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar-list li {
-    margin: 10px 20px;
-}
-
-.navbar-list a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 5px;
-}
-
-.navbar-list a:hover {
-    background-color: #555;
-}
-
-
-/* Profile */
-.profile-content {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#profile-image {
-    width: 300px; 
+    min-width: 200px;
     height: auto;
-    border-radius: 10px; 
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
- /* Buttons like and unlike */
-.profile-buttons {
+/* Estilo del texto */
+.user-name {
+    font-size: 2rem;
+    color: #ff4d4d;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.user-gender,
+.user-description,
+.user-age {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+/* Botones de acción */
+.action-buttons{
+    gap: 1rem;
+}
+
+.action-buttons .btn {
+    border-radius: 50px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.action-buttons .btn-secondary {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    color: #555;
+}
+
+.action-buttons .btn-secondary:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.action-buttons .btn-primary {
+    background-color: #ff4d4d;
+    border-color: #ff4d4d;
+    color: white;
+}
+
+.action-buttons .btn-primary:hover {
+    background-color: #ff7f7f;
+    border-color: #ff7f7f;
+}
+
+/* Botones en el encabezado */
+.header-buttons {
     display: flex;
-    gap: 30px;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
 }
 
-#button-like {
-    padding: 10px;
+.header-buttons .btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px; /* Bordes redondeados */
+    font-size: 1rem;
     font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón Profile */
+.header-buttons .btn-outline-primary {
+    border: 2px solid #007bff;
+    color: #007bff;
+    background-color: transparent;
+}
+
+.header-buttons .btn-outline-primary:hover {
+    background-color: #007bff;
     color: white;
-    background-color: rgb(204, 30, 30);
-    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
 }
 
-#button-unlike {
-    padding: 10px;
-    font-weight: bold;
+/* Botón Logout */
+.header-buttons .btn-outline-danger {
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    background-color: transparent;
+}
+
+.header-buttons .btn-outline-danger:hover {
+    background-color: #dc3545;
     color: white;
-    background-color: rgb(204, 30, 30);
-    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
 }
-
-#button-like:hover {
-    background-color: rgb(153, 40, 40);
-}
-
-#button-unlike:hover {
-    background-color: rgb(153, 40, 40);
-}
-
-/*#first-user {
-    padding: 10px;
-    font-weight: bold;
-    color: white;
-    background-color: rgb(204, 30, 30);
-    border-radius: 10px;
-}
-
-#first-user:hover {
-    background-color: rgb(153, 40, 40);
-}*/
