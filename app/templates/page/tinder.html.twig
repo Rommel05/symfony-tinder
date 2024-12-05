@@ -54,7 +54,7 @@
                     let like = document.getElementById('button-like');
                     let unlike = document.getElementById('button-unlike');
 
-                    like.addEventListener('click', () => {
+                    /*like.addEventListener('click', () => {
                         fetch(`/like/${userBId}`, { method: 'POST' })
                             .then(() => window.location.reload());
                     });
@@ -62,7 +62,16 @@
                     unlike.addEventListener("click", () => {
                         fetch(`/unlike/${userBId}` , { method: 'POST' })
                             .then(() => window.location.reload());
+                    })*/
+
+                    like.addEventListener('click', () => {
+                        window.location.assign(`/like/${userBId}`);
+                    });
+
+                    unlike.addEventListener("click", () => {
+                        window.location.assign(`/unlike/${userBId}`);
                     })
+
                 }
             }
         </script>
