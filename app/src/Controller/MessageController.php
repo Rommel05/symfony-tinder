@@ -35,6 +35,27 @@ class MessageController extends AbstractController
         $form = $this->createForm(MessageType::class);
         $form->handleRequest($request);
 
+        if ($request->isXmlHttpRequest()) {
+            $messages = $messageRepository->createQueryBuilder('m')
+                ->where('(m.sennder = :idSender AND m.receiver = :idReceiver)')
+                ->orWhere('(m.sennder = :idReceiver AND m.receiver = :idSender)')
+                ->orderBy('m.date', 'ASC')
+                ->setParameter('idSender', $sender->getId())
+                ->setParameter('idReceiver', $receiver->getId())
+                ->getQuery()
+                ->getResult();
+
+            $data = array_map(function ($message) {
+                return [
+                    'id' => $message->getId(),
+                    'text' => $message->getText(),
+                    'date' => $message->getDate()->format('Y-m-d H:i:s'),
+                ];
+            }, $messages);
+
+            return $this->json($data);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $message = $form->getData();
             $message->setSennder($sender);
@@ -52,7 +73,7 @@ class MessageController extends AbstractController
         return $this->render('message/index.html.twig', [
             'messages' => $messages,
             'form' => $form->createView(),
-
+            'receiver' => $receiver,
         ]);
 
     }
