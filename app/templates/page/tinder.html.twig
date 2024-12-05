@@ -10,8 +10,11 @@
 {% block body %}
     <div id="content" class="container-fluid vh-100 d-flex flex-column">
         <!-- Header con botones -->
+
         <div class="header-buttons d-flex justify-content-between align-items-center py-3">
             <button class="btn btn-outline-danger" onclick="window.location.href='{{ path('app_profile') }}'">Profile</button>
+            <button class="btn btn-outline-danger" onclick="window.location.href='{{ path('app_match') }}'">Match</button>
+            <button class="btn btn-outline-danger" onclick="window.location.href='{{ path('app_likes') }}'">Likes</button>
             <button class="btn btn-outline-danger" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
         </div>
 
