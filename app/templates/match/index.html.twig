@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="{{ asset('css/style-form.css') }}">
 {% endblock %}
 {% block body %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.search) }}
+        <input type="submit" value="search">
+    {{ form_end(form) }}
+
+
     {% if pairs is not empty %}
         {% for pair in pairs %}
             <div>
