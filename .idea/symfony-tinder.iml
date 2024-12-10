@@ -137,6 +137,19 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/twig/extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/twig/twig" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/cboden/ratchet" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/evenement/evenement" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/ratchet/rfc6455" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/react/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/react/dns" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/react/event-loop" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/react/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/react/socket" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/react/stream" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
