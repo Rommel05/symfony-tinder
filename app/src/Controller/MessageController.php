@@ -61,7 +61,6 @@ class MessageController extends AbstractController
             $message->setSennder($sender);
             $message->setReceiver($receiver);
             $message->setDate(new \DateTime('now'));
-            $message->setIsRead(false);
 
             $entityManager->persist($message);
             $entityManager->flush();

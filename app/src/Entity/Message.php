@@ -21,7 +21,7 @@ class Message
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $isRead = null;
+    private ?bool $sended = false;
 
     #[ORM\ManyToOne(inversedBy: 'sentMessage')]
     private ?User $sennder = null;
@@ -58,14 +58,14 @@ class Message
         return $this;
     }
 
-    public function isIsRead(): ?bool
+    public function isSended(): ?bool
     {
-        return $this->isRead;
+        return $this->sended;
     }
 
-    public function setIsRead(bool $isRead): self
+    public function setSended(bool $sended): self
     {
-        $this->isRead = $isRead;
+        $this->sended = $sended;
 
         return $this;
     }

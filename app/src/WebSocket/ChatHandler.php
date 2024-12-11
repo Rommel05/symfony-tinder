@@ -7,10 +7,12 @@ use Ratchet\ConnectionInterface;
 
 class ChatHandler implements MessageComponentInterface
 {
+    private $clients = [];
     //Método llamado cuando un nuevo cliente se conecta
     public function onOpen(ConnectionInterface $conn)
     {
         echo "Nueva conexión: {$conn->resourceId}\n";
+        $this->clients[$conn->resourceId] = $conn;
     }
 
     //Método llamado cuando un cliente recibe un mensaje
