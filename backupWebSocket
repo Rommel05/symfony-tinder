@@ -1,0 +1,59 @@
+namespace App\WebSocket;
+
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
+
+class ChatHandler implements MessageComponentInterface
+{
+    private $clients = []; // Mantiene un registro de todas las conexiones activas
+
+    // Este método se ejecuta cuando un cliente se conecta al WebSocket
+    public function onOpen(ConnectionInterface $conn)
+    {
+        // Aquí $conn es la conexión del cliente que se acaba de conectar
+        echo "Nueva conexión: {$conn->resourceId}\n";
+
+        // Almacenamos la conexión del cliente usando su resourceId como clave
+        $this->clients[$conn->resourceId] = $conn;
+    }
+
+    // Este método se ejecuta cuando un cliente envía un mensaje
+    public function onMessage(ConnectionInterface $from, $msg)
+    {
+        echo "Mensaje recibido de {$from->resourceId}: $msg\n";
+
+        // El mensaje puede ser en formato JSON. Intentamos decodificarlo.
+        $data = json_decode($msg, true);
+
+        // Comprobamos que el mensaje contiene la información del receptor
+        if (isset($data['receiverId'])) {
+            // Buscamos la conexión del receptor basado en el ID del receptor enviado en el mensaje
+            foreach ($this->clients as $client) {
+                if ($client !== $from && $client->resourceId == $data['receiverId']) {
+                    // Si encontramos al receptor, le enviamos el mensaje
+                    $client->send($msg);
+                    break;
+                }
+            }
+        }
+    }
+
+    // Este método se ejecuta cuando un cliente se desconecta
+    public function onClose(ConnectionInterface $conn)
+    {
+        echo "Conexión cerrada: {$conn->resourceId}\n";
+
+        // Eliminamos la conexión del cliente de la lista
+        unset($this->clients[$conn->resourceId]);
+    }
+
+    // Este método se ejecuta cuando ocurre un error en la conexión
+    public function onError(ConnectionInterface $conn, \Exception $e)
+    {
+        echo "Error: {$e->getMessage()}\n";
+
+        // Cerramos la conexión en caso de error
+        $conn->close();
+    }
+}
+

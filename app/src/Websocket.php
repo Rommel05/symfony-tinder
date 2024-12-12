@@ -181,22 +181,23 @@ class Websocket {
         // Unlimited loop.
         while (true)
         {
-            $resultado = $this->pdo->query("SELECT m.*, u.username  as fromUserName, u2.username  as toUserName
+            $resultado = $this->pdo->query("SELECT m.*, u.name  as senderName, u2.name  as receiverName
 			FROM message as m 
 			INNER join user as u
-			ON u.id = m.from_user_id
+			ON u.id = m.sennder_id
 			INNER join user as u2
-			ON u2.id = m.to_user_id
+			ON u2.id = m.receiver_id
 			WHERE m.sended = 0");
 
+            //iterar sobre los resultados de la consulta
             while ($registro = $resultado->fetch())
             {
-                $current_to_user_id = $registro['to_user_id'];
-                $current_from_user_id = $registro['from_user_id'];
+                $current_receiver_id = $registro['receiver_id'];
+                $current_sennder_id = $registro['sennder_id'];
                 $user_message = $registro['text'];
-                $fromUserName = $registro['fromUserName'];
-                $this->send((array('type'=>'chatmsg', 'toUserId'=>$current_to_user_id, 'fromUserId'=>$current_from_user_id,
-                    'text'=>$user_message, 'timestamp'=>new \DateTime($registro['timestamp']), "fromUserName"=>$fromUserName)));
+                $senderName = $registro['senderName'];
+                $this->send((array('type'=>'chatmsg', 'receiverId'=>$current_receiver_id, 'sennderId'=>$current_sennder_id,
+                    'text'=>$user_message, 'timestamp'=>new \DateTime($registro['timestamp']), "sendername"=>$senderName)));
                 $this->pdo->exec('UPDATE message SET sended  = true WHERE id = ' . $registro['id']);
 
             }
@@ -208,7 +209,7 @@ class Websocket {
                 //sleep(10);
                 $userId = $registro['id'];
                 $userName = $registro['username'];
-                $this->send((array('type'=>'usermsg', 'id'=>$userId, 'userName'=>$userName, 'info'=>$registro['info'], "image"=>$registro['image'])));
+                $this->send((array('type'=>'usermsg', 'id'=>$userId, 'userName'=>$userName/*, 'info'=>$registro['info'], "image"=>$registro['image']*/)));
                 $this->pdo->exec('UPDATE user SET sended  = true WHERE id = ' . $registro['id']);
 
             }
