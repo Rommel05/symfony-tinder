@@ -61,11 +61,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $age = null;
 
-    #[ORM\OneToMany(mappedBy: 'sennder', targetEntity: Message::class)]
-    private Collection $sentMessage;
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Message::class)]
+    private Collection $messages;
 
-    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Message::class)]
-    private Collection $recivedMessage;
+    #[ORM\Column]
+    private ?bool $sended = false;
 
     public function __construct()
     {
@@ -73,8 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->swipesAsUserB = new ArrayCollection();
         $this->pairsAsUserA = new ArrayCollection();
         $this->pairsAsUserB = new ArrayCollection();
-        $this->sentMessage = new ArrayCollection();
-        $this->recivedMessage = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -342,59 +341,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Message>
      */
-    public function getSentMessage(): Collection
+    public function getMessages(): Collection
     {
-        return $this->sentMessage;
+        return $this->messages;
     }
 
-    public function addSentMessage(Message $sentMessage): self
+    /*public function addMessage(Message $message): self
     {
-        if (!$this->sentMessage->contains($sentMessage)) {
-            $this->sentMessage->add($sentMessage);
-            $sentMessage->setSennder($this);
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeSentMessage(Message $sentMessage): self
+    public function removeMessage(Message $message): self
     {
-        if ($this->sentMessage->removeElement($sentMessage)) {
+        if ($this->messages->removeElement($message)) {
             // set the owning side to null (unless already changed)
-            if ($sentMessage->getSennder() === $this) {
-                $sentMessage->setSennder(null);
+            if ($message->getUser() === $this) {
+                $message->setUser(null);
+            }
+        }
+
+        return $this;
+    }*/
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getSender() === $this) {
+                $message->setSender(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Message>
-     */
-    public function getRecivedMessage(): Collection
+    public function getSended(): ?bool
     {
-        return $this->recivedMessage;
+        return $this->sended;
     }
 
-    public function addRecivedMessage(Message $recivedMessage): self
+    public function setSended(bool $sended): self
     {
-        if (!$this->recivedMessage->contains($recivedMessage)) {
-            $this->recivedMessage->add($recivedMessage);
-            $recivedMessage->setReceiver($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRecivedMessage(Message $recivedMessage): self
-    {
-        if ($this->recivedMessage->removeElement($recivedMessage)) {
-            // set the owning side to null (unless already changed)
-            if ($recivedMessage->getReceiver() === $this) {
-                $recivedMessage->setReceiver(null);
-            }
-        }
+        $this->sended = $sended;
 
         return $this;
     }

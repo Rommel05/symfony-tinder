@@ -23,11 +23,13 @@ class Message
     #[ORM\Column(nullable: true)]
     private ?bool $sended = false;
 
-    #[ORM\ManyToOne(inversedBy: 'sentMessage')]
-    private ?User $sennder = null;
+    #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $sender = null;
 
-    #[ORM\ManyToOne(inversedBy: 'recivedMessage')]
-    private ?User $receiver = null;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $receiver;
 
     public function getId(): ?int
     {
@@ -70,14 +72,14 @@ class Message
         return $this;
     }
 
-    public function getSennder(): ?User
+    public function getSender(): ?User
     {
-        return $this->sennder;
+        return $this->sender;
     }
 
-    public function setSennder(?User $sennder): self
+    public function setSender(?User $User): self
     {
-        $this->sennder = $sennder;
+        $this->sender = $User;
 
         return $this;
     }

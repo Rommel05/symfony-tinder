@@ -58,8 +58,8 @@ class Websocket {
         if (is_array($message) && $message["type"] == 'chatmsg'){
             if (isset($this->connections[$message["receiverId"]]))
                 @socket_write($this->connections[$message["receiverId"] ], $raw, strlen($raw));
-            if (isset($this->connections[$message["sennderId"]]))
-                @socket_write($this->connections[$message["sennderId"] ], $raw, strlen($raw));
+            if (isset($this->connections[$message["senderId"]]))
+                @socket_write($this->connections[$message["senderId"] ], $raw, strlen($raw));
         }else{
 
             foreach($this->clients as $client)
@@ -184,7 +184,7 @@ class Websocket {
             $resultado = $this->pdo->query("SELECT m.*, u.name  as senderName, u2.name  as receiverName
 			FROM message as m 
 			INNER join user as u
-			ON u.id = m.sennder_id
+			ON u.id = m.sender_id
 			INNER join user as u2
 			ON u2.id = m.receiver_id
 			WHERE m.sended = 0");
@@ -193,10 +193,10 @@ class Websocket {
             while ($registro = $resultado->fetch())
             {
                 $current_receiver_id = $registro['receiver_id'];
-                $current_sennder_id = $registro['sennder_id'];
+                $current_sender_id = $registro['sender_id'];
                 $user_message = $registro['text'];
                 $senderName = $registro['senderName'];
-                $this->send((array('type'=>'chatmsg', 'receiverId'=>$current_receiver_id, 'sennderId'=>$current_sennder_id,
+                $this->send((array('type'=>'chatmsg', 'receiverId'=>$current_receiver_id, 'senderId'=>$current_sender_id,
                     'text'=>$user_message, 'timestamp'=>new \DateTime($registro['timestamp']), "sendername"=>$senderName)));
                 $this->pdo->exec('UPDATE message SET sended  = true WHERE id = ' . $registro['id']);
 
