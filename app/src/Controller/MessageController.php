@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Form\MessageType;
+use App\Form\SearchType;
 use App\Repository\MessageRepository;
+use App\Repository\PairRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,8 +26,8 @@ class MessageController extends AbstractController
         }
 
         $messages = $messageRepository->createQueryBuilder('m')
-            ->where('(m.sennder = :idSender AND m.receiver = :idReceiver)')
-            ->orWhere('(m.sennder = :idReceiver AND m.receiver = :idSender)')
+            ->where('(m.sender = :idSender AND m.receiver = :idReceiver)')
+            ->orWhere('(m.sender = :idReceiver AND m.receiver = :idSender)')
             ->orderBy('m.date', 'ASC')
             ->setParameter('idSender', $sender->getId())
             ->setParameter('idReceiver', $receiver->getId())
@@ -37,8 +39,8 @@ class MessageController extends AbstractController
 
         if ($request->isXmlHttpRequest()) {
             $messages = $messageRepository->createQueryBuilder('m')
-                ->where('(m.sennder = :idSender AND m.receiver = :idReceiver)')
-                ->orWhere('(m.sennder = :idReceiver AND m.receiver = :idSender)')
+                ->where('(m.sender = :idSender AND m.receiver = :idReceiver)')
+                ->orWhere('(m.sender = :idReceiver AND m.receiver = :idSender)')
                 ->orderBy('m.date', 'ASC')
                 ->setParameter('idSender', $sender->getId())
                 ->setParameter('idReceiver', $receiver->getId())
@@ -75,5 +77,26 @@ class MessageController extends AbstractController
             'receiver' => $receiver,
         ]);
 
+    }
+
+    #[Route('/match', name: 'app_users')]
+    public function match(PairRepository $pairRepository, Request $request): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+        $pairs = [];
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $searchParameter = $form->get('search')->getData();
+            $pairs = $pairRepository->findBySearchParameter($user,$searchParameter);
+        } else {
+            $pairs = $pairRepository->findBy(['userA' => $user]);
+        }
+
+        return $this->render('message/users.html.twig', [
+            'form' => $form->createView(),
+            'pairs' => $pairs,
+        ]);
     }
 }
