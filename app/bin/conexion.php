@@ -6,7 +6,7 @@ $opciones = array(
 );
 
 $pdo = new PDO(
-    'mysql:host=localhost;dbname=whatsapp;charset=utf8',
+    'mysql:host=localhost;dbname=tinder;charset=utf8',
     'root',
     'sa',
     $opciones);
