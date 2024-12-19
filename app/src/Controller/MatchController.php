@@ -14,7 +14,7 @@ class MatchController extends AbstractController
     {
         $user = $this->getUser();
         $pairs = $pairRepository->findBy(['userA' => $user]);
-        return $this->render('match/index.html.twig', [
+        return $this->render('match/match.html.twig', [
             'pairs' => $pairs,
         ]);
     }

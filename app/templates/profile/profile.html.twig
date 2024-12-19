@@ -9,11 +9,15 @@
 
 {% block body %}
     <div class="container-fluid vh-100 d-flex flex-column">
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center py-3">
-            <h1 class="text-danger">Profile</h1>
-            <a href="{{ path('app_tinder') }}" class="text-decoration-none fw-bold tinder-link">Tinder</a>
-        </div>
+        <!-- Menú lateral (Visible por defecto) -->
+        <ul id="sideNav" class="side-nav">
+            <li><a href="{{ path('app_tinder') }}">Tinder</a></li>
+            <li><a href="{{ path('app_profile') }}" class="active">Profile</a></li>
+            <li><a href="{{ path('app_match') }}">Match</a></li>
+            <li><a href="{{ path('app_likes') }}">Likes</a></li>
+            <li><a href="{{ path('app_users') }}">Messages</a></li>
+            <li><a href="{{ path('app_logout') }}">Logout</a></li>
+        </ul>
 
         <!-- Contenido principal -->
         <div class="main-layout flex-grow-1 d-flex flex-column justify-content-center align-items-center">

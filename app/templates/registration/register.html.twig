@@ -62,7 +62,15 @@
                         {{ form_widget(registrationForm.file, {'attr': {'class': 'form-control'}}) }}
                         {{ form_errors(registrationForm.file) }}
                     </div>
-                    <br>
+
+                    <!-- Campo Interests -->
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.interests, 'Interests', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.interests, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.interests) }}
+                    </div>
+
+                    <!-- Campo Agree Terms -->
                     <div class="mb-3 larger-check">
                         {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
                         {{ form_label(registrationForm.agreeTerms, 'I agree to the terms and conditions', {'label_attr': {'class': 'form-check-label'}}) }}

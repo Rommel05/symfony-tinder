@@ -1,9 +1,66 @@
 #content {
     background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
     font-family: Arial, sans-serif;
+    position: relative;
 }
 
-/* General layout */
+/* Estilo para el menú lateral (siempre visible) */
+.side-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    background-color: #ff4b4b;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0; /* El menú estará siempre visible en el lado izquierdo */
+    z-index: 1000;
+}
+
+.side-nav li a {
+    display: block;
+    color: #333;
+    padding: 16px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: relative;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+/* Estilo para la opción activa */
+.side-nav li a.active {
+    background-color: #ff4d4d; /* Fondo destacado cuando está activo */
+    color: white; /* Texto en blanco */
+    padding-left: 30px; /* Desplaza el texto hacia la derecha para el efecto visual */
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* Sombra a la derecha para mayor énfasis */
+}
+
+/* Borde izquierdo destacado en la opción activa */
+.side-nav li a.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #ff7f7f; /* Borde de color más claro */
+}
+
+/* Efecto de hover para las opciones no activas */
+.side-nav li a:hover:not(.active) {
+    background-color: #ff7676; /* Fondo en hover */
+    color: white; /* Texto blanco en hover */
+}
+
+/* Estilo del contenido principal */
+.main-layout {
+    margin-left: 250px; /* El contenido se ajusta para que no quede cubierto por el menú */
+    transition: margin-left 0.3s ease;
+}
+
+/* Estilo para las casillas del perfil de usuario */
 .user-profile {
     display: flex;
     align-items: center;
@@ -12,7 +69,6 @@
     margin: auto;
 }
 
-/* Imagen del perfil */
 .profile-img {
     max-height: 400px;
     width: auto;
@@ -20,20 +76,16 @@
     border-radius: 10px;
 }
 
-/* Contenedor de información */
 .info-card {
     max-width: 500px;
     width: 100%;
     min-width: 200px;
-    height: auto;
     padding: 1rem;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
 }
 
-/* Estilo del texto */
 .user-name {
     font-size: 2rem;
     color: #ff4d4d;
@@ -49,8 +101,7 @@
     margin-bottom: 0.5rem;
 }
 
-/* Botones de acción */
-.action-buttons{
+.action-buttons {
     gap: 1rem;
 }
 
@@ -81,47 +132,4 @@
 .action-buttons .btn-primary:hover {
     background-color: #ff7f7f;
     border-color: #ff7f7f;
-}
-
-/* Botones en el encabezado */
-.header-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-}
-
-.header-buttons .btn {
-    padding: 0.5rem 1.5rem;
-    border-radius: 25px; /* Bordes redondeados */
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Botón Profile */
-.header-buttons .btn-outline-primary {
-    border: 2px solid #007bff;
-    color: #007bff;
-    background-color: transparent;
-}
-
-.header-buttons .btn-outline-primary:hover {
-    background-color: #007bff;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-}
-
-/* Botón Logout */
-.header-buttons .btn-outline-danger {
-    border: 2px solid #dc3545;
-    color: #dc3545;
-    background-color: transparent;
-}
-
-.header-buttons .btn-outline-danger:hover {
-    background-color: #dc3545;
-    color: white;
-    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
 }

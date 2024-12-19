@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Match{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/style-match.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid vh-100 d-flex flex-column">
+        <!-- Menú lateral (Visible por defecto) -->
+        <ul id="sideNav" class="side-nav">
+            <li><a href="{{ path('app_tinder') }}">Tinder</a></li>
+            <li><a href="{{ path('app_profile') }}">Profile</a></li>
+            <li><a href="{{ path('app_match') }}" class="active">Match</a></li>
+            <li><a href="{{ path('app_likes') }}">Likes</a></li>
+            <li><a href="{{ path('app_users') }}">Messages</a></li>
+            <li><a href="{{ path('app_logout') }}">Logout</a></li>
+        </ul>
+
+        <!-- Contenido principal (desplazado por el menú lateral) -->
+        <div class="main-layout flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+            <div class="container mt-5">
+                {% if pairs is not empty %}
+                    <div id="carouselMatches" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for pair in pairs %}
+                                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                    <div class="card shadow-sm mx-auto" style="max-width: 18rem;">
+                                        <img src="{{ asset('images/' ~ pair.userB.imagePath) }}"
+                                             class="card-img-top"
+                                             alt="profile image">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">
+                                                <a href="{{ path('app_message', { id: pair.userB.id }) }}" class="text-decoration-none">
+                                                    {{ pair.userB.name }}
+                                                </a>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselMatches" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselMatches" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning text-center" role="alert">
+                        No tienes ningún match
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

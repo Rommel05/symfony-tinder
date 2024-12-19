@@ -4,6 +4,8 @@
     color: white;
     font-family: Arial, sans-serif;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Profile header */
@@ -12,6 +14,56 @@ h1 {
     font-weight: bold;
     color: white;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para el menú lateral (siempre visible) */
+.side-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    background-color: #ff4b4b;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.side-nav li a {
+    display: block;
+    color: #333;
+    padding: 16px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: relative;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+/* Estilo para la opción activa */
+.side-nav li a.active {
+    background-color: #ff4d4d; /* Fondo destacado cuando está activo */
+    color: white; /* Texto en blanco */
+    padding-left: 30px; /* Desplaza el texto hacia la derecha para el efecto visual */
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* Sombra a la derecha para mayor énfasis */
+}
+
+/* Borde izquierdo destacado en la opción activa */
+.side-nav li a.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #ff7f7f; /* Borde de color más claro */
+}
+
+/* Efecto de hover para las opciones no activas */
+.side-nav li a:hover:not(.active) {
+    background-color: #ff7676; /* Fondo en hover */
+    color: white; /* Texto blanco en hover */
 }
 
 /* Profile content */
@@ -86,10 +138,11 @@ h1 {
     background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro translúcido */
 }
 
+/* Estilos para el link de Tinder */
 .tinder-link {
     font-size: 2.5rem; /* Igual que el título Profile */
     font-weight: bold; /* Igual que el título Profile */
-    color: rgba(220,53,69,255); !important;
+    color: rgba(220,53,69,255); /* Color principal */
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Igual que el título Profile */
     text-decoration: none; /* Sin subrayado */
     cursor: pointer; /* Para que se note como interactivo */
@@ -97,4 +150,10 @@ h1 {
 
 .tinder-link:hover {
     text-decoration: underline; /* Efecto visual al pasar el cursor */
+}
+
+/* Estilo del contenido principal */
+.main-layout {
+    margin-left: 250px; /* El contenido se ajusta para que no quede cubierto por el menú */
+    transition: margin-left 0.3s ease;
 }
