@@ -39,6 +39,19 @@ class PairRepository extends ServiceEntityRepository
         }
     }
 
+    public function findBySearchParameter($user, string $term): array
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.userB', 'userB')
+            ->andWhere('p.userA = :user')
+            ->andWhere('userB.name LIKE :term')
+            ->setParameter('user', $user)
+            ->setParameter('term', '%' . $term . '%')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Pair[] Returns an array of Pair objects
 //     */

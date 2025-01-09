@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -66,7 +67,7 @@ class ProfileController extends AbstractController
             ])
             ->add('name', TextType::class, ['label' => 'Name'])
             ->add('age', NumberType::class, ['label' => 'Age'])
-            ->add('gender', TextType::class, ['label' => 'Gender'])
+            ->add('gender', ChoiceType::class, ['choices' => ['man' => 'man', 'woman' => 'woman']])
             ->add('description', TextType::class, ['label' => 'Description'])
             ->add('imagePath', FileType::class, [
                 'label' => 'Profile Image',

@@ -17,7 +17,7 @@ class LikesController extends AbstractController
     {
         /*$user = $this->getUser();
         $likes = $swipeRepository->findBy(['userB' => $user, 'action' => '1']);
-        return $this->render('likes/index.html.twig', [
+        return $this->render('likes/match.html.twig', [
             'likes' => $likes,
         ]);*/
 

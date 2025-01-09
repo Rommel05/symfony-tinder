@@ -1,0 +1,52 @@
+/* Estilo global para la página */
+body {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Estilo para los mensajes */
+.message-item {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Color del texto de los mensajes */
+.message-text {
+    color: #555;
+}
+
+/* Estilo para el nombre del remitente */
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.text-primary {
+    color: #ff4b4b; /* Un color primario de tu paleta */
+}
+
+/* Opcional: Agregar un borde o cambiar el fondo cuando el usuario está escribiendo */
+#form .form-control {
+    background-color: #f9f9f9;
+}
+
+/* Asegurar que el formulario se vea consistente */
+.input-group {
+    flex-grow: 1;
+}
+
+.message-date {
+    font-size: 0.8em;
+    font-style: italic;
+    color: gray;
+}

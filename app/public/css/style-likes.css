@@ -1,0 +1,151 @@
+/* Estilo global para la página */
+body {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Contenedor principal */
+#content {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Menú lateral */
+.side-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    background-color: #ff4b4b;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0; /* El menú estará siempre visible en el lado izquierdo */
+    z-index: 1000;
+}
+
+.side-nav li a {
+    display: block;
+    color: #333;
+    padding: 16px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.side-nav li a:hover {
+    background-color: #ff7676;
+    color: white;
+}
+
+.side-nav li a.activo {
+    background-color: #ff4d4d; /* Fondo destacado cuando está activo */
+    color: white; /* Texto en blanco */
+    padding-left: 30px; /* Desplaza el texto hacia la derecha para el efecto visual */
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* Sombra a la derecha para mayor énfasis */
+    position: relative; /* Para aplicar la pseudo-clase */
+}
+
+.side-nav li a.activo::before {
+    content: ''; /* Línea decorativa */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px; /* Grosor de la línea */
+    height: 100%; /* Cubrir toda la altura del elemento */
+    background-color: #ff7f7f; /* Color de la línea */
+}
+
+/* Estilo para el contenido principal */
+.main-layout {
+    margin-left: 250px; /* El contenido se ajusta para que no quede cubierto por el menú */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Estilo para los títulos */
+h2 {
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Estilo cuando no hay likes */
+.text-center {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-top: 20px;
+}
+
+/* Fondo oscuro y ampliación de la imagen */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Imagen ampliada con bordes redondeados */
+.overlay img {
+    max-width: 60%;
+    max-height: 70%;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+/* Mostrar la imagen ampliada */
+.overlay.active {
+    display: flex;
+}
+
+/* Contenedor de imágenes de usuarios */
+.row.justify-content-center {
+    gap: 20px; /* Separar los elementos entre sí */
+}
+
+/* Contenedor de las imágenes */
+.col-md-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaciado entre los elementos */
+    padding: 10px; /* Espaciado interno */
+}
+
+/* Imágenes de usuarios */
+#imagen-reducida{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-left: 60px;
+    margin-right: 60px;
+    transition: transform 0.3s ease; /* Efecto de zoom */
+    cursor: pointer;
+}
+
+#imagen-reducida:hover {
+    transform: scale(1.05); /* Zoom al pasar el mouse */
+}

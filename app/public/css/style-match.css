@@ -1,0 +1,138 @@
+body {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Menú lateral (siempre visible) */
+.side-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    background-color: #ff4b4b;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-nav li a {
+    display: block;
+    color: #333;
+    padding: 16px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative; /* Necesario para los efectos del borde */
+}
+
+.side-nav li a:hover {
+    background-color: #ff7676;
+    color: white;
+}
+
+/* Estilo para el ítem activo */
+.side-nav li a.active {
+    background-color: #ff4d4d; /* Fondo destacado cuando está activo */
+    color: white; /* Texto en blanco */
+    padding-left: 30px; /* Desplaza el texto hacia la derecha para el efecto visual */
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* Sombra a la derecha para mayor énfasis */
+}
+
+/* Borde izquierdo destacado en la opción activa */
+.side-nav li a.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #ff7f7f; /* Borde de color más claro */
+}
+
+/* Efecto de hover para las opciones no activas */
+.side-nav li a:hover:not(.active) {
+    background-color: #ff7676; /* Fondo en hover */
+    color: white; /* Texto blanco en hover */
+}
+
+/* Estilo del contenido principal */
+.main-layout {
+    margin-left: 250px; /* El contenido se ajusta para que no quede cubierto por el menú */
+    transition: margin-left 0.3s ease;
+}
+
+.container {
+    padding-top: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-title a {
+    color: #ff4d4d;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.card-title a:hover {
+    color: #ff7f7f;
+}
+
+/* Estilo personalizado para las flechas del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-image: none; /* Eliminar el fondo predeterminado */
+    color: #333; /* Color del texto del menú (gris oscuro) */
+    font-size: 2rem; /* Tamaño de las flechas */
+}
+
+/* Posicionamiento de las flechas más cerca del contenedor */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%; /* Ajusta el ancho del área activa si es necesario */
+    opacity: 1; /* Asegúrate de que el área activa no esté oculta */
+    top: 50%; /* Centra las flechas verticalmente */
+    transform: translateY(-50%); /* Ajusta el desplazamiento para un mejor centrado */
+}
+
+/* Flecha izquierda */
+.carousel-control-prev-icon::before {
+    content: '\2039'; /* Unicode para la flecha izquierda */
+    color: #333; /* Color gris oscuro */
+}
+
+/* Flecha derecha */
+.carousel-control-next-icon::before {
+    content: '\203A'; /* Unicode para la flecha derecha */
+    color: #333; /* Color gris oscuro */
+}
+
+/* Estilo hover para las flechas */
+.carousel-control-prev:hover .carousel-control-prev-icon::before,
+.carousel-control-next:hover .carousel-control-next-icon::before {
+    color: rgba(0, 0, 0, 0.7); /* Oscurecer un poco la flecha al pasar el cursor */
+}
+
+.alert {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #ff4d4d;
+    border-radius: 10px;
+    font-weight: bold;
+}

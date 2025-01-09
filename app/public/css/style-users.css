@@ -1,0 +1,126 @@
+/* Estilo global para la página */
+body {
+    background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alineación hacia la izquierda */
+}
+
+/* Menú lateral */
+.side-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    background-color: #ff4b4b;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.side-nav li a {
+    display: block;
+    color: #333;
+    padding: 16px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.side-nav li a:hover {
+    background-color: #ff7676;
+    color: white;
+}
+
+.side-nav li a.active {
+    background-color: #ff4d4d; /* Fondo destacado cuando está activo */
+    color: white; /* Texto en blanco */
+    padding-left: 30px; /* Desplaza el texto hacia la derecha para el efecto visual */
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* Sombra a la derecha para mayor énfasis */
+    position: relative; /* Para aplicar la pseudo-clase */
+}
+
+.side-nav li a.active::before {
+    content: ''; /* Línea decorativa */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px; /* Grosor de la línea */
+    height: 100%; /* Cubrir toda la altura del elemento */
+    background-color: #ff7f7f; /* Color de la línea */
+}
+
+/* Contenido principal */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alineación a la izquierda de los usuarios */
+}
+
+/* Estilo para los títulos */
+h2 {
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+}
+
+.main-content p {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-top: 20px;
+}
+
+/* Estilo para la lista de usuarios */
+.user-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;  /* Asegura que los items llenen el espacio disponible */
+    gap: 10px; /* Espacio entre los elementos de la lista */
+    padding: 20px;  /* Espacio alrededor de los elementos */
+}
+
+/* Elemento de la lista de usuario */
+.user-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espacio entre la imagen y el nombre */
+    padding: 10px; /* Espacio alrededor de cada usuario */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo gris ligeramente transparente */
+    border-radius: 10px; /* Bordes redondeados */
+    width: 100%; /* Toma el ancho completo disponible */
+    transition: background-color 0.3s ease;  /* Efecto de transición al pasar el mouse */
+}
+
+.user-item:hover {
+    background-color: rgba(255, 255, 255, 0.4); /* Resalta el item al pasar el mouse */
+}
+
+.user-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;  /* Imagen redonda */
+}
+
+.user-item a {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.user-item a:hover {
+    color: #ff7676;
+}
