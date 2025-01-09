@@ -79,7 +79,7 @@ class MessageController extends AbstractController
 
     }
 
-    #[Route('/match', name: 'app_users')]
+    /*#[Route('/match', name: 'app_users')]
     public function match(PairRepository $pairRepository, Request $request): Response
     {
         $user = $this->getUser();
@@ -98,5 +98,5 @@ class MessageController extends AbstractController
             'form' => $form->createView(),
             'pairs' => $pairs,
         ]);
-    }
+    }*/
 }
