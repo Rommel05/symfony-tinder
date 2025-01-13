@@ -9,7 +9,6 @@
 
 {% block body %}
     <div id="content" class="container-fluid vh-100 d-flex flex-column">
-        <!-- Menú lateral (Visible por defecto) -->
         <ul id="sideNav" class="side-nav">
             <li><a href="{{ path('app_tinder') }}">Tinder</a></li>
             <li><a href="{{ path('app_profile') }}">Profile</a></li>
@@ -19,14 +18,12 @@
             <li><a href="{{ path('app_logout') }}">Logout</a></li>
         </ul>
 
-        <!-- Contenido principal -->
         <div class="main-layout flex-grow-1 d-flex flex-column justify-content-center align-items-center">
             <h2 class="text-center mb-4">Users that liked your profile</h2>
             {% if likes is not empty %}
                 <div class="row justify-content-center">
                     {% for like in likes %}
                         <div class="col-6 col-md-3 text-center mb-4">
-                            <!-- Ajuste para imágenes redondas usando Bootstrap -->
                             <img src="{{ asset('images/' ~ like.userA.imagePath) }}"
                                  alt="profile image"
                                  id="imagen-reducida"
@@ -42,30 +39,24 @@
         </div>
     </div>
 
-    <!-- Overlay for Enlarged Image -->
     <div id="imageOverlay" class="overlay" onclick="closeImage()">
         <img id="enlargedImage" src="" alt="Enlarged Profile Image">
     </div>
 
     {% block javascripts %}
         <script>
-            // Función para abrir la imagen ampliada
             function openImage(imageSrc) {
                 var overlay = document.getElementById('imageOverlay');
                 var enlargedImage = document.getElementById('enlargedImage');
 
-                // Asignar la fuente de la imagen a la imagen ampliada
                 enlargedImage.src = imageSrc;
 
-                // Mostrar el overlay con la imagen ampliada
                 overlay.classList.add('active');
             }
 
-            // Función para cerrar la imagen ampliada al hacer clic fuera de la imagen
             function closeImage() {
                 var overlay = document.getElementById('imageOverlay');
 
-                // Ocultar el overlay
                 overlay.classList.remove('active');
             }
         </script>
