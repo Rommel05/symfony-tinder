@@ -19,27 +19,57 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use function Sodium\add;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('age', TextType::class)
+            ->add('name', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your name'
+                    ]),
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your email'
+                    ])
+                ]
+            ])
+            ->add('age', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your age'
+                    ]),
+                    new Length([
+                        'min' => 18,
+                    ])
+                ]
+            ])
             ->add('description', TextareaType::class)
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                     'man' => 'man',
                     'woman' => 'woman',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please chose your gender'
+                    ])
                 ]
             ])
             ->add('interests', ChoiceType::class, [
                 'choices' => [
                     'man' => 'man',
                     'woman' => 'woman',
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please chose your interests'
+                    ])
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [

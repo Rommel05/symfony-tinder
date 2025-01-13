@@ -145,6 +145,7 @@
       <path value="$PROJECT_DIR$/app/vendor/symfony/doctrine-messenger" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/http-kernel" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/mailer" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/ux-twig-component" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
