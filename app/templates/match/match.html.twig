@@ -9,7 +9,6 @@
 
 {% block body %}
     <div class="container-fluid vh-100 d-flex flex-column">
-        <!-- Menú lateral (Visible por defecto) -->
         <ul id="sideNav" class="side-nav">
             <li><a href="{{ path('app_tinder') }}">Tinder</a></li>
             <li><a href="{{ path('app_profile') }}">Profile</a></li>
@@ -19,7 +18,6 @@
             <li><a href="{{ path('app_logout') }}">Logout</a></li>
         </ul>
 
-        <!-- Contenido principal (desplazado por el menú lateral) -->
         <div class="main-layout flex-grow-1 d-flex flex-column justify-content-center align-items-center">
             <div class="container mt-5">
                 {% if pairs is not empty %}

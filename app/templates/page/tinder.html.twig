@@ -9,7 +9,6 @@
 
 {% block body %}
     <div id="content" class="container-fluid vh-100 d-flex flex-column">
-        <!-- Menú lateral (Visible por defecto) -->
         <ul id="sideNav" class="side-nav">
             <li><a href="{{ path('app_tinder') }}" class="active">Tinder</a></li>
             <li><a href="{{ path('app_profile') }}">Profile</a></li>
@@ -19,28 +18,20 @@
             <li><a href="{{ path('app_logout') }}">Logout</a></li>
         </ul>
 
-        <!-- Contenido principal -->
         <div class="main-layout flex-grow-1 d-flex flex-column justify-content-center align-items-center">
-            <!--<header class="text-center mb-4">
-                <h1 class="display-4 text-danger">Tinder</h1>
-            </header>-->
-
             <div class="main-content w-100 d-flex justify-content-center align-items-center">
                 {% if usuario is not null %}
                     <div class="user-profile d-flex align-items-center">
-                        <!-- Imagen del perfil -->
                         <img src="{{ asset('images/' ~ usuario.imagePath) }}"
                              class="profile-img shadow rounded"
                              alt="profile image">
 
-                        <!-- Información del perfil -->
                         <div class="info-card d-flex flex-column justify-content-center">
                             <h2 class="user-name">{{ usuario.name }}</h2>
                             <p class="user-gender">{{ usuario.gender }}</p>
                             <p class="user-description">{{ usuario.description }}</p>
                             <p class="user-age"><strong>Age:</strong> {{ usuario.age }}</p>
 
-                            <!-- Botones de acción -->
                             <div class="action-buttons d-flex justify-content-around mt-3">
                                 <button id="button-unlike" class="btn btn-secondary">Unlike</button>
                                 <button id="button-like" class="btn btn-primary">Like</button>

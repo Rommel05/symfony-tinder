@@ -9,7 +9,6 @@
 
 {% block body %}
     <div class="container-fluid p-0 vh-100 d-flex">
-        <!-- Menú lateral -->
         <nav>
             <ul id="sideNav" class="side-nav">
                 <li><a href="{{ path('app_tinder') }}">Tinder</a></li>
@@ -21,7 +20,6 @@
             </ul>
         </nav>
 
-        <!-- Contenido principal -->
         <main class="main-content flex-grow-1">
             <div class="user-list">
                 {% if pairs is not empty %}
