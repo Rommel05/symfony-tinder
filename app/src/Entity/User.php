@@ -70,7 +70,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Please enter your age')]
-    #[Assert\Regex(pattern: '/^0-9/+$', message: 'Please enter a valid age')]
+    #[Assert\Regex(pattern: '/^[0-9]+$/', message: 'Please enter a valid age')]
+    #[Assert\GreaterThanOrEqual(value: 18, message: 'You need to be 18 years old')]
     private ?string $age = null;
 
     #[ORM\OneToMany(mappedBy: 'sennder', targetEntity: Message::class)]
