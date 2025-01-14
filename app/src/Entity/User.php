@@ -32,14 +32,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Please enter your password')]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Please enter your name')]
+    #[Assert\Regex(pattern: '/\d/', message: 'Invalid name', match: false)]
     private ?string $name = null;
 
 
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Please chose your gender')]
     private ?string $gender = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -61,9 +65,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $pairsAsUserB;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Please choose your interests')]
     private ?string $interests = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Please enter your age')]
+    #[Assert\Regex(pattern: '/^0-9/+$', message: 'Please enter a valid age')]
     private ?string $age = null;
 
     #[ORM\OneToMany(mappedBy: 'sennder', targetEntity: Message::class)]
