@@ -46,7 +46,7 @@ class PairRepository extends ServiceEntityRepository
             ->andWhere('p.userA = :user')
             ->andWhere('userB.name LIKE :term')
             ->setParameter('user', $user)
-            ->setParameter('term', '%' . $term . '%')
+            ->setParameter('term', $term . '%')
             ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
