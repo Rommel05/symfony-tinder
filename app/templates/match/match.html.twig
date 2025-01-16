@@ -19,6 +19,15 @@
         </ul>
 
         <div class="main-layout flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+            <nav class="nav">
+                <div class="container-fluid">
+                    {{ form_start(form, {'attr' : {'class': 'd-flex', 'role': 'search'}})}}
+                    {{ form_row(form.search, {'attr' : {'class': 'form-control me-2', 'aria-label': 'Search'}}) }}
+                    <input type="submit" value="FIND" class="btn btn-outline-success ms-2">
+                    {{ form_end(form) }}
+                </div>
+            </nav>
+
             <div class="container mt-5">
                 {% if pairs is not empty %}
                     <div id="carouselMatches" class="carousel slide" data-bs-ride="carousel">
